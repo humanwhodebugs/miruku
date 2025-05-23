@@ -97,6 +97,7 @@ reboot
 
 POST-INSTALLATION CONFIGURATION
 
+1. Configuring ArchLinuxCN
 Activate ArchLinuxCN Repo
 sudo vim /etc/pacman.conf
 
@@ -108,6 +109,7 @@ Sync repo and install keyring:
 sudo pacman -Sy
 sudo pacman -S archlinuxcn-keyring
 
+2. Installing Paru
 Install rustup:
 sudo pacman -S rustup
 rustup install stable
@@ -118,24 +120,26 @@ git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
 
+3. Configuring BSPWM Double Border
 BSPWM Dependencies
 git clone https://github.com/wmutils/opt
 cd opt
 make
 sudo make install
 
+4. Configuring ThinkFan
+Install ThinkFan and lm_sensors (can skip lm_sensors if already installed):
 paru -S thinkfan lm_sensors  # install
 
+Run this in terminal:
 echo "options thinkpad_acpi fan_control=1" | sudo tee /etc/modprobe.d/thinkfan.conf
+sudo sh -c 'echo "enable" > /proc/acpi/ibm/fan'      # manual enable fan mode on setup
+sudo modprobe thinkpad_acpi fan_control=1            # load module with manual fan control option
+sudo mkinitcpio -P                                   # regenerate initramfs
 
-sudo sh -c 'echo "enable" > /proc/acpi/ibm/fan'      # manual enable fan mode sekali saat setup
-sudo modprobe thinkpad_acpi fan_control=1            # load module dengan opsi manual fan control
+Configure ThinkFan:
+sudo vim /etc/thinkfan.conf
 
-sudo mkinitcpio -P                                    # regenerasi initramfs
-
-sudo vim /etc/thinkfan.conf                           # konfigurasi thinkfan
-
-# Example config (YAML format)
 sensors:
   - hwmon: /sys/class/hwmon
     name: coretemp
@@ -157,12 +161,11 @@ levels:
   - [5, 65, 75]      # Level 5: High fan
   - [7, 70, 85]      # Level 7: Maximum fan speed
 
-sudo systemctl enable thinkfan                        # enable service supaya jalan otomatis tiap boot
-sudo systemctl start thinkfan                         # start service sekarang juga
-
-sudo journalctl -xeu thinkfan.service                 # cek logs service
-
-sudo reboot                                           # reboot agar semua konfigurasi kernel modul jalan otomatis
+When finished, run this:
+sudo systemctl enable thinkfan                        # enable service so it will run automatically after startup
+sudo systemctl start thinkfan                         # start service
+sudo journalctl -xeu thinkfan.service                 # check service logs
+sudo reboot                                           # reboot so every configuration and kernel reboot automatically runs
 
 Do this after reboot to check if thinkfan is enabled:
 ❯ cat /proc/acpi/ibm/fan
@@ -173,20 +176,18 @@ commands:	level <level> (<level> is 0-7, auto, disengaged, full-speed)
 commands:	enable, disable
 commands:	watchdog <timeout> (<timeout> is 0 (off), 1-120 (seconds))
 
-Additional Configurations
-
-1. SSH Setup
+5. SSH Setup
 chmod 600 ~/.ssh/id_rsa
 chmod 700 ~/.ssh
 
-2. Git Configuration
+6. Git Configuration
 git config --global user.name "Muhammad Rifai"
 git config --global user.email "humanwhodebugs@gmail.com"
 
-3. Change Folder Icons
-papirus-folders -t Papirus -C cat-mocha-pink
+7. Change Folder Icons
+papirus-folders -t Papirus -C cat-latte-sky
 
-4. TLP Power Management Setup
+8. TLP Power Management Setup
 Edit `/etc/tlp.conf`:
 vim /etc/tlp.conf
 
@@ -197,7 +198,7 @@ CPU_SCALING_GOVERNOR_ON_AC=performance
 Restart service:
 systemctl restart tlp
 
-5. Kernel Configuration
+9. Kernel Configuration
 Edit GRUB defaults:
 sudo nano /etc/default/grub
 
@@ -208,13 +209,13 @@ Update GRUB and reboot:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 reboot
 
-6. Wine Gaming Setup
+10. Wine Gaming Setup
 WINEARCH=win64 WINEPREFIX=~/Wine winecfg
 
-7. Git Repository Cloning
+11. Git Repository Cloning
 git clone git@github.com:humanwhodebugs/repo-name.git
 
-8. System Boot Optimization
+12. System Boot Optimization
 
 Check boot time:
 systemd-analyze blame
