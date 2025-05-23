@@ -30,15 +30,10 @@ clone_repo() {
   local name=$1
   local repo_url=$2
   local dest_dir=$3
-  local branch=${4:-} # Optional branch
 
   if [ ! -d "$dest_dir" ]; then
     echo "Cloning $name..."
-    if [ -n "$branch" ]; then
-      git clone --depth 1 --branch "$branch" "$repo_url" "$dest_dir"
-    else
-      git clone --depth 1 "$repo_url" "$dest_dir"
-    fi
+    git clone "$repo_url" "$dest_dir"
     echo "Done cloning $name into $dest_dir"
   else
     echo "$name already cloned in $dest_dir"
@@ -54,11 +49,6 @@ echo "╭─────────────╮"
 echo "│ Cloning TPM │"
 echo "╰─────────────╯"
 clone_repo "TPM" "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
-
-echo "╭───────────────────────────────╮"
-echo "│ Cloning Catppuccin Tmux Theme │"
-echo "╰───────────────────────────────╯"
-clone_repo "Catppuccin Tmux Theme" "https://github.com/catppuccin/tmux.git" "$HOME/.tmux/plugins/catppuccin" "v2.1.2"
 
 echo "╭─────────────────────────╮"
 echo "│ Installing Gaming Tools │"
