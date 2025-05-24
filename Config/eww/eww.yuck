@@ -94,7 +94,7 @@
         (box :orientation "v"
              :space-evenly "false"
           (systray :class "tray"
-                   :icon-size 18
+                   :icon-size 17
                    :orientation "v"
                    :spacing 5)
           (button :class "music-icon"
