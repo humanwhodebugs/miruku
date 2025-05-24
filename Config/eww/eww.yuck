@@ -94,8 +94,9 @@
         (box :orientation "v"
              :space-evenly "false"
           (systray :class "tray"
-                   :icon-size 20
-                   :orientation "v")
+                   :icon-size 18
+                   :orientation "v"
+                   :spacing 5)
           (button :class "music-icon"
                   :onclick "scripts/popup music"
                   "")
