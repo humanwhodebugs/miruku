@@ -84,7 +84,7 @@ body {
   /* styling options */
   --custom-spotify-bar: on; /* off: default, on: custom text-like spotify progress bar */
   --ascii-titles: on; /* off: default, on: use ascii font for titles at the start of a channel */
-  --ascii-loader: system24; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
+  --ascii-loader: cats; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
 
   /* panel labels */
   --panel-labels: on; /* off: default, on: add labels to panels */
@@ -97,28 +97,26 @@ body {
   --colors: on; /* off: discord default colors, on: midnight custom colors */
 
   /* text colors */
-  --text-0: var(--bg-4); /* text on colored elements */
-  --text-1: oklch(95% 0 0); /* other normally white text */
-  --text-2: oklch(85% 0 0); /* headings and important text */
-  --text-3: oklch(75% 0 0); /* normal text */
-  --text-4: oklch(60% 0 0); /* icon buttons and channels */
-  --text-5: oklch(40% 0 0); /* muted channels/chats and timestamps */
+  --text-0: #e6e9ef; /* text on colored elements */
+  --text-1: #4c4f69; /* other normally white text */
+  --text-2: #4c4f69; /* headings and important text */
+  --text-3: #4c4f69; /* normal text */
+  --text-4: #4c4f69; /* icon buttons and channels */
+  --text-5: #acb0be; /* muted channels/chats and timestamps */
 
   /* background and dark colors */
-  --bg-1: oklch(31% 0 0); /* dark buttons when clicked */
-  --bg-2: oklch(27% 0 0); /* dark buttons */
-  --bg-3: oklch(23% 0 0); /* spacing, secondary elements */
+  --bg-1: #acb0be; /* dark buttons when clicked */
+  --bg-2: #acb0be; /* dark buttons */
+  --bg-3: #eff1f5; /* spacing, secondary elements */
   --bg-4: #eff1f5; /* main background color */
-  --hover: oklch(54% 0 0 / 0.1); /* channels and buttons when hovered */
-  --active: oklch(
-    54% 0 0 / 0.2
-  ); /* channels and buttons when clicked or selected */
+  --hover: #acb0be; /* channels and buttons when hovered */
+  --active: #acb0be; /* channels and buttons when clicked or selected */
   --active-2: oklch(54% 0 0 / 0.3); /* extra state for transparent buttons */
   --message-hover: var(--hover); /* messages when hovered */
 
   /* accent colors */
-  --accent-1: var(--purple-1); /* links and other accent text */
-  --accent-2: var(--purple-2); /* small accent elements */
+  --accent-1: #4c4f69; /* links and other accent text */
+  --accent-2: #4c4f69; /* small accent elements */
   --accent-3: var(--purple-3); /* accent buttons */
   --accent-4: var(--purple-4); /* accent buttons when hovered */
   --accent-5: var(--purple-5); /* accent buttons when clicked */
@@ -154,15 +152,10 @@ body {
   --offline: var(--text-4); /* change to #82838b for default offline color */
 
   /* border colors */
-  --border-light: var(--hover); /* general light border color */
-  --border: var(--active); /* general normal border color */
-  --border-hover: var(--accent-2); /* border color of panels when hovered */
-  --button-border: hsl(
-    220,
-    0%,
-    100%,
-    0.1
-  ); /* neutral border color of buttons */
+  --border-light: #4c4f69; /* general light border color */
+  --border: #acb0be; /* general normal border color */
+  --border-hover: #4c4f69; /* border color of panels when hovered */
+  --button-border: #40a02b; /* neutral border color of buttons */
 
   /* base colors */
   --red-1: oklch(75% 0.13 0);
