@@ -47,7 +47,7 @@
     corners = all
 
     # Text settings
-    font = JetBrainsMono NF SemiBold 10
+    font = Maple Mono NF 10
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"
