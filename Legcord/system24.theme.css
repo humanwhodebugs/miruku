@@ -15,8 +15,8 @@
 
 body {
   /* font, change to '' for default discord font */
-  --font: "JetBrainsMono NF SemiBold"; /* change to '' for default discord font */
-  --code-font: "JetBrainsMono NF SemiBold"; /* change to '' for default discord font */
+  --font: "Maple Mono NF"; /* change to '' for default discord font */
+  --code-font: "Maple Mono NF"; /* change to '' for default discord font */
   font-weight: 300; /* text font weight. 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
   letter-spacing: -0.05ch; /* decreases letter spacing for better readability. recommended on monospace fonts.*/
 
@@ -83,8 +83,8 @@ body {
 
   /* styling options */
   --custom-spotify-bar: on; /* off: default, on: custom text-like spotify progress bar */
-  --ascii-titles: on; /* off: default, on: use ascii font for titles at the start of a channel */
-  --ascii-loader: cats; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
+  --ascii-titles: off; /* off: default, on: use ascii font for titles at the start of a channel */
+  --ascii-loader: off; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
 
   /* panel labels */
   --panel-labels: on; /* off: default, on: add labels to panels */
