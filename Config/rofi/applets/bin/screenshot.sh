@@ -45,11 +45,10 @@ run_rofi() {
   echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi_cmd
 }
 
-# Setup filename with timestamp and resolution
+# Setup filename with timestamp
 time=$(date +%Y-%m-%d-%H-%M-%S)
-geometry=$(xrandr | grep 'current' | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current')
 dir="$HOME/Pictures/Screenshots"
-file="Screenshot_${time}_${geometry}.png"
+file="Screenshot_${time}.png"
 
 # Create screenshot directory if it doesn't exist
 if [[ ! -d "$dir" ]]; then
@@ -59,13 +58,7 @@ fi
 # Function: Show notifications and preview screenshot
 notify_view() {
   notify_cmd_shot='dunstify'
-  ${notify_cmd_shot} -t 2000 "Screenshot" "Copied to clipboard."
-  viewnior "${dir}/${file}"
-  if [[ -e "${dir}/${file}" ]]; then
-    ${notify_cmd_shot} -t 2000 "Screenshot" "Screenshot Saved."
-  else
-    ${notify_cmd_shot} -t 2000 "Screenshot" "Deleted."
-  fi
+  notify-send -t 2000 "Screenshot" "Screenshot taken and copied to clipboard."
 }
 
 # Function: Copy screenshot to clipboard
