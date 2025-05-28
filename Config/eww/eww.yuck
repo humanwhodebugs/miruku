@@ -194,7 +194,7 @@
        :valign "center"
     (button :class "profile-icon"
             :onclick "scripts/popup notification"
-            "")))
+            "")))
 
 ;; Profile Section Widgets ;;
 (defwidget notification-section []
