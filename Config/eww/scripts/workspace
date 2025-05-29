@@ -8,7 +8,7 @@ workspaces() {
   WORKSPACES=$(bspc query -D --names)
   FOCUSED_WS=$(bspc query -D -d focused --names)
 
-  # Define icons for workspaces
+  # Define icons (this array is no longer used for focused workspace)
   ICONS=("●" "●" "●" "●" "●" "●")
 
   # Begin JSON array output
@@ -32,8 +32,16 @@ workspaces() {
       OCCUPIED_STATUS="false"
     fi
 
-    # Get icon for current workspace and output JSON object
-    ICON=${ICONS[$i]}
+    # Set the icon
+    if [ "$CURRENT" = "true" ]; then
+      ICON="󰮯" # Focused workspace
+    elif [ "$OCCUPIED_STATUS" = "true" ]; then
+      ICON="●" # Occupied but not focused
+    else
+      ICON="●" # Empty workspace
+    fi
+
+    # Output JSON object
     echo -n "{\"id\": \"$ws\", \"icon\": \"$ICON\", \"current\": $CURRENT, \"occupied\": $OCCUPIED_STATUS}"
 
     # Add comma separator between workspaces (except after the last one)
