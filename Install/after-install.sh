@@ -81,10 +81,8 @@ mkdir -p "$HOME/Music"
 touch "$HOME/.mpd/mpd.db" "$HOME/.mpd/mpd.log" "$HOME/.mpd/mpd.pid"
 
 echo "Starting MPD service..."
-mpd || echo "MPD might already be running, continuing..."
-
-echo "Enabling MPD service..."
 systemctl --user enable mpd.service
+echo "Enabling MPD service..."
 systemctl --user start mpd.service
 
 echo "MPD setup completed!"
