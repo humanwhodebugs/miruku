@@ -127,52 +127,41 @@ sudo make install
 
 4. Configuring ThinkFan
 Install ThinkFan and lm_sensors (can skip lm_sensors if already installed):
-paru -S thinkfan lm_sensors  # install
+paru -S thinkfan lm_sensors
 
-Run this in terminal:
+Enable manual fan control for ThinkPad:
 echo "options thinkpad_acpi fan_control=1" | sudo tee /etc/modprobe.d/thinkfan.conf
-sudo sh -c 'echo "enable" > /proc/acpi/ibm/fan'      # manual enable fan mode on setup
-sudo modprobe thinkpad_acpi fan_control=1            # load module with manual fan control option
-sudo mkinitcpio -P                                   # regenerate initramfs
 
-Configure ThinkFan:
-sudo vim /etc/thinkfan.conf
+Check if thinkpad_acpi is loaded:
+lsmod | grep thinkpad_acpi
 
-sensors:
-  - hwmon: /sys/class/hwmon
-    name: coretemp
-    indices: [1, 2, 3]  # Package, Core 0, Core 1
+If lsmod | grep thinkpad_acpi shows thinkpad_acpi loaded, either reboot your system or you need to remove the module and reload the module with manual fan control enabled:
+sudo modprobe -r thinkpad_acpi
+sudo modprobe thinkpad_acpi fan_control=1
 
-  - hwmon: /sys/class/hwmon
-    name: thinkpad
-    indices: [1]  # CPU temperature from thinkpad sensor
+(Optional) regenerate initramfs:
+If you are loading thinkpad_acpi in your initramfs (check your mkinitcpio hooks below), regenerate the initramfs:
+sudo mkinitcpio -P
 
-fans:
-  - tpacpi: /proc/acpi/ibm/fan
+Checkhing mkinitcpio hooks:
+Run:
+cat /etc/mkinitcpio.conf
 
-levels:
-  - [0, 0, 50]       # Fan off until 50°C
-  - [1, 45, 55]      # Level 1: Silent mode
-  - [2, 50, 60]      # Level 2: Quiet fan
-  - [3, 55, 65]      # Level 3: Moderate fan
-  - [4, 60, 70]      # Level 4: Medium fan
-  - [5, 65, 75]      # Level 5: High fan
-  - [7, 70, 85]      # Level 7: Maximum fan speed
+If the MODULES=() is empty, you don't need to regenerate initramfs, otherwise, regenerate it.
 
-When finished, run this:
-sudo systemctl enable thinkfan                        # enable service so it will run automatically after startup
-sudo systemctl start thinkfan                         # start service
-sudo journalctl -xeu thinkfan.service                 # check service logs
-sudo reboot                                           # reboot so every configuration and kernel reboot automatically runs
+Copy the thinkfan.conf to /etc/
 
-Do this after reboot to check if thinkfan is enabled:
-❯ cat /proc/acpi/ibm/fan
-status:		enabled
-speed:		3779
-level:		3
-commands:	level <level> (<level> is 0-7, auto, disengaged, full-speed)
-commands:	enable, disable
-commands:	watchdog <timeout> (<timeout> is 0 (off), 1-120 (seconds))
+Then:
+Enable thinkfan automatically on startup:
+systemctl enable thinkfan
+
+Start the service now:
+systemctl start thinkfan
+
+Check if thinkfan is running properly:
+systemctl status thinkfan
+
+Done, only took me 2 hours to fix this documentation.
 
 5. SSH Setup
 chmod 600 ~/.ssh/id_rsa*
