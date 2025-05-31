@@ -201,7 +201,7 @@ Edit GRUB defaults:
 sudo nano /etc/default/grub
 
 Update kernel parameters:
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.system.show_status=auto rd.udev.log_priority=3 mitigations=off noibrs noibpb nopti nospectre_v2 l1tf=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 elevator=bfq io_uring=1"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.system.show_status=auto rd.udev.log_priority=3 mitigations=off noibrs noibpb nopti nospectre_v2 l1tf=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=30 elevator=none io_uring=1"
 
 Update GRUB and reboot:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
