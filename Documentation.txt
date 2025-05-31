@@ -76,10 +76,14 @@ EDITOR=vim visudo
 Search for `%wheel` and uncomment:
 %wheel ALL=(ALL:ALL) ALL
 
-12. Enable 32-bit Support
+12. Enable 32-bit Support and Adding ArchLinuxCN Repository
 Edit `/etc/pacman.conf` and uncomment:
 [multilib]
 Include= /etc/pacman.d/mirrorlist
+
+And add this to the end of file:
+[archlinuxcn]
+Server = https://repo.archlinuxcn.org/$arch
 
 13. Install Bootloader
 grub-install /dev/sda
@@ -98,12 +102,6 @@ reboot
 POST-INSTALLATION CONFIGURATION
 
 1. Configuring ArchLinuxCN
-Activate ArchLinuxCN Repo
-sudo vim /etc/pacman.conf
-
-Add to end of file:
-[archlinuxcn]
-Server = https://repo.archlinuxcn.org/$arch
 
 Sync repo and install keyring:
 sudo pacman -Sy
