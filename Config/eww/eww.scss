@@ -1,0 +1,426 @@
+// ============================================
+// Catppuccin Latte - Color Variables
+// ============================================
+$base: #eff1f5;
+$blue: #1e66f5;
+$crust: #dce0e8;
+$flamingo: #dd7878;
+$green: #40a02b;
+$lavender: #7287fd;
+$mantle: #e6e9ef;
+$maroon: #e64553;
+$mauve: #8839ef;
+$overlay0: #9ca0b0;
+$overlay1: #8c8fa1;
+$overlay2: #7c7f93;
+$peach: #fe640b;
+$pink: #ea76cb;
+$red: #d20f39;
+$rosewater: #dc8a78;
+$sapphire: #209fb5;
+$sky: #04a5e5;
+$subtext0: #6c6f85;
+$subtext1: #5c5f77;
+$surface0: #ccd0da;
+$surface1: #bcc0cc;
+$surface2: #acb0be;
+$teal: #179299;
+$text: #4c4f69;
+$yellow: #df8e1d;
+
+// ============================================
+// Global Styles
+// ============================================
+* {
+  all: unset;
+  font-family: "Maple Mono NF";
+}
+
+// ============================================
+// Bar Icons
+// ============================================
+.bat {
+  color: $mantle;
+  font-size: 22px;
+  padding-left: 1px;
+  padding-bottom: 2px;
+}
+
+.brightness-icon {
+  color: $mantle;
+  font-size: 26px;
+  padding-left: 2px;
+}
+
+.logout-icon {
+  font-size: 19px;
+  font-weight: bold;
+  padding-left: 2px;
+}
+
+.music-icon {
+  padding-right: 4px;
+}
+
+.profile-icon {
+  color: $text;
+  font-size: 20px;
+  padding-right: 5px;
+  padding-top: 5px;
+}
+
+.reboot-icon {
+  font-size: 21px;
+  padding-left: 2px;
+}
+
+.restart-icon {
+  font-size: 22px;
+  padding-right: 3px;
+}
+
+.screenrecord-icon {
+  font-size: 20px;
+  padding-left: 1px;
+}
+
+.screenshot-icon {
+  font-size: 18px;
+}
+
+.shutdown-icon {
+  font-size: 20px;
+  padding-right: 3px;
+}
+
+.volume-icon {
+  color: $mantle;
+  font-size: 17px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+}
+
+.wifi-icon {
+  color: $mantle;
+  font-size: 17px;
+  padding-right: 5px;
+}
+
+// ============================================
+// Container Elements
+// ============================================
+.bar {
+  background-color: $base;
+  border-radius: 6px;
+}
+
+.powermenu {
+  color: $text;
+  padding-bottom: 9px;
+  padding-top: 5px;
+}
+
+.tray {
+  padding-bottom: 5px;
+  padding-left: 2px;
+}
+
+// ============================================
+// Menu & Tooltip
+// ============================================
+menu {
+  background-color: $surface2;
+  color: $text;
+  font-size: 13px;
+  padding: 5px;
+
+  menuitem {
+    border-radius: 6px;
+    padding: 8px 12px;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
+
+  separator {
+    background-color: $text;
+    padding-top: 1px;
+
+    &:last-child {
+      padding: unset;
+    }
+  }
+}
+
+tooltip {
+  background-color: $surface2;
+  color: $text;
+}
+
+// ============================================
+// Scale Elements
+// ============================================
+.bribar trough highlight {
+  background-color: $mantle;
+  border-radius: 6px;
+}
+
+.volbar trough highlight {
+  background-color: $mantle;
+  border-radius: 6px;
+}
+
+scale trough {
+  all: unset;
+  background-color: $text;
+  border-radius: 6px;
+  margin-left: 2px;
+  min-height: 80px;
+  min-width: 9px;
+}
+
+// ============================================
+// UI Elements
+// ============================================
+.control {
+  background-color: $surface2;
+  border-radius: 6px;
+  margin: 5px;
+}
+
+.time {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $mantle;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 5px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+// ============================================
+// Workspace Controls
+// ============================================
+.workspaces {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $mantle;
+  font-size: 20px;
+  margin: 5px;
+  padding: 2px;
+
+  button {
+    &.current {
+      padding-right: 2px;
+    }
+
+    &.occupied {
+      color: $text;
+    }
+  }
+}
+
+// ============================================
+// Calendar Widget
+// ============================================
+.cal-box {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $text;
+  font-size: 1em;
+  font-weight: bold;
+
+  .cal-inner-box {
+    padding: 0.5rem 0.2rem 0.2rem;
+
+    .cal {
+      padding: 0.48rem 0.25rem 0rem;
+
+      &.highlight {
+        padding: 0rem;
+      }
+    }
+  }
+}
+
+calendar {
+  color: $mantle;
+
+  &:selected {
+    color: $blue;
+  }
+
+  &.header {
+    color: $text;
+    font-weight: bold;
+  }
+
+  &.button {
+    color: $text;
+  }
+
+  &.highlight {
+    color: $text;
+    font-weight: bold;
+  }
+
+  &:indeterminate {
+    color: $text;
+  }
+
+  day {
+    color: $text;
+  }
+}
+
+// ============================================
+// Music Player Widget
+// ============================================
+.album_art {
+  background-repeat: no-repeat;
+  background-size: 90px;
+  margin-left: 15px;
+  min-height: 90px;
+  min-width: 90px;
+}
+
+.artist {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.music-progress > trough {
+  background-color: $text;
+  border-radius: 6px;
+  margin-top: 5px;
+  min-width: 80px;
+}
+
+.music-progress > trough > progress {
+  background-color: $mantle;
+  border-radius: 6px;
+}
+
+.musicbox {
+  margin: 0px 0px 0px 20px;
+}
+
+.musicbuttons {
+  margin-top: 10px;
+}
+
+.musicplayer {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $text;
+}
+
+.progress-container {
+  min-width: 120px;
+  padding-top: 4px;
+}
+
+.playbutton {
+  background-repeat: no-repeat;
+  background-size: 24px;
+  margin: 0px;
+  min-height: 24px;
+  min-width: 24px;
+}
+
+.trackbutton {
+  background-repeat: no-repeat;
+  background-size: 18px;
+  margin: 3px 0px 0px 0px;
+  min-height: 18px;
+  min-width: 18px;
+}
+
+// ============================================
+// Notification and Profile Widget
+// ============================================
+.avatar {
+  background-size: cover;
+  border-radius: 50%;
+  min-width: 91px;
+  min-height: 91px;
+}
+
+.clear-button {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.notifications-container {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.notification-header {
+  padding: 0px 5px;
+}
+
+.notification-item {
+  background-color: $surface2;
+  border-radius: 6px;
+  padding: 10px 5px;
+}
+
+.notification-section {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $text;
+  padding: 11px;
+}
+
+.notifications-title {
+  font-weight: bold;
+}
+
+.notification-title {
+  color: $text;
+  font-weight: bold;
+}
+
+.profile-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: $text;
+}
+
+.profile-info {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+// ============================================
+// Screenrecord and Screenshot Widget
+// ============================================
+.screen-button {
+  background-color: $mantle;
+  color: $text;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.screenshot {
+  background-color: $surface2;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.screenrecord {
+  background-color: $surface2;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.screen-text {
+  color: $text;
+  font-weight: bold;
+}
