@@ -1,0 +1,6 @@
+#!/bin/bash
+# A script for eww (elkowar's wacky widget) to retrieve recent notifications using dunstctl.
+# Maintained by humanwhodebugs
+
+# Get the five most recent notifications and format them as JSON
+dunstctl history | jq -r '.data[0][0:5] | map({summary: .summary.data, body: .body.data}) | {"notifications": .}'
