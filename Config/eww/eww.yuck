@@ -43,7 +43,7 @@
 (defpoll workspaces         :interval "1s"  :initial "[]" "~/.config/eww/scripts/workspace")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;         Widgets        ;;
+;;         Widgets         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Battery Widget
@@ -152,7 +152,7 @@
        :spacing 20
     (box :class "profile-info"
          :orientation "h"
-         :spacing 20
+         :spacing 10
       (box :class "avatar-bg"
            :orientation "v"
         (image :class "avatar"
@@ -176,12 +176,14 @@
                  :text "⊝"))))
     (box :class "panel-info"
          :orientation "h"
-         :spacing 20
+         :spacing 10
       (box :class "panel-bg"
         (box :class "stats-module"
              :orientation "v"
              :space-evenly false
-          (label :text "Stats" :class "stats-title" :halign "start")
+          (label :class "stats-title"
+                 :halign "start"
+                 :text "Stats")
           (box :class "stats-bars-container"
                :orientation "h"
                :spacing 20
@@ -212,14 +214,24 @@
              :orientation "v"
              :space-evenly "false"
           (box :orientation "h"
-            (label :class "todo-title" :halign "start" :text "Todo"))
-          (box :class "todo-progress-container" :halign "center"
+            (button :class "todo-title"
+                    :halign "start"
+                    :onclick "scripts/popup task" "Todo"))
+          (box :class "todo-progress-container"
+               :halign "center"
             (circular-progress :class "todo-progress"
                                :value {todo.percentage}
                                :thickness 6
                                :start-at 75
-              (label :class "todo-fraction"
-                     :text "${todo.completed}/${todo.total}"))))
+              (box :class "todo-count"
+                   :halign "center"
+                   :space-evenly false
+                   :orientation "h"
+                (label :class "todo-done"
+                       :text {todo.completed}
+                       :yalign 0)
+                (label :text "/")
+                (label :text {todo.total})))))
         (box :class "panel-bg"
              :orientation "v"
              :space-evenly false
@@ -444,7 +456,7 @@
 (defwindow calendar
   :geometry (geometry :x "60px"
                       :y "538px"
-                      :width "250px"
+                      :width "280px"
                       :height "60px")
   (cal))
 
@@ -460,7 +472,7 @@
 (defwindow screenrecord
   :geometry (geometry :x "60px"
                       :y "613px"
-                      :width "250px"
+                      :width "280px"
                       :height "100px")
   (screenrecord-widget))
 
@@ -468,6 +480,6 @@
 (defwindow screenshot
   :geometry (geometry :x "60px"
                       :y "613px"
-                      :width "250px"
+                      :width "280px"
                       :height "100px")
   (screenshot-widget))

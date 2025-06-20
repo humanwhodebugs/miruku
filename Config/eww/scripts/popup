@@ -96,9 +96,7 @@ screenshot() {
 }
 
 # Handle passed argument to trigger specific window or command
-if [ "$1" = "wifi" ]; then
-  kitty -e nmtui
-elif [ "$1" = "audio" ]; then
+if [ "$1" = "audio" ]; then
   pavucontrol
 elif [ "$1" = "calendar" ]; then
   calendar
@@ -115,4 +113,13 @@ elif [ "$1" = "screenrecord" ]; then
   screenrecord
 elif [ "$1" = "screenshot" ]; then
   screenshot
+elif [ "$1" = "task" ]; then
+  # Close notification if open, then open taskwarrior in terminal
+  if [[ -f "$HOME/.cache/eww-notification.lock" ]]; then
+    ${EWW_BIN} close notification
+    rm "$HOME/.cache/eww-notification.lock"
+  fi
+  kitty --hold task list
+elif [ "$1" = "wifi" ]; then
+  kitty -e nmtui
 fi

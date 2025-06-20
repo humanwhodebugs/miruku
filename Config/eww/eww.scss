@@ -353,6 +353,14 @@ tooltip {
   background-color: #98c379;
 }
 
+.todo-count {
+  padding-top: 16px;
+}
+
+.todo-done {
+  font-size: 30px;
+}
+
 .todo-progress {
   background-color: $surface2;
   color: $text;
