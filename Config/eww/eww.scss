@@ -121,7 +121,6 @@ $yellow: #df8e1d;
 }
 
 .tray {
-  padding-bottom: 5px;
   padding-left: 2px;
 }
 
@@ -281,7 +280,7 @@ calendar {
 .album_art {
   background-repeat: no-repeat;
   background-size: 90px;
-  margin-left: 15px;
+  margin-left: 10px;
   min-height: 90px;
   min-width: 90px;
 }
@@ -299,7 +298,7 @@ calendar {
 }
 
 .music-progress > trough > progress {
-  background-color: $mantle;
+  background-color: $surface2;
   border-radius: 6px;
 }
 
@@ -312,9 +311,9 @@ calendar {
 }
 
 .musicplayer {
-  background-color: $surface2;
+  background-color: $mantle;
   border-radius: 6px;
-  color: $text;
+  padding: 8px 2px;
 }
 
 .progress-container {
@@ -346,6 +345,12 @@ calendar {
   border-radius: 50%;
   min-width: 91px;
   min-height: 91px;
+}
+
+.avatar-bg {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 10px;
 }
 
 .clear-button {
@@ -391,10 +396,13 @@ calendar {
   color: $text;
 }
 
-.profile-info {
+.profile-date-bg {
   background-color: $mantle;
   border-radius: 6px;
-  padding: 10px;
+}
+
+.profile-info {
+  padding: 0px;
 }
 
 // ============================================

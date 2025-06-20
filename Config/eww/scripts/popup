@@ -29,28 +29,6 @@ calendar() {
   fi
 }
 
-# Function: Toggle the music player window
-musicplayer() {
-  LOCK_FILE="$HOME/.cache/eww-music.lock" # Lock file for musicplayer
-
-  run() {
-    ${EWW_BIN} open musicplayer
-  }
-
-  if [[ ! $(pidof eww) ]]; then
-    ${EWW_BIN} daemon
-    sleep 1
-  fi
-
-  if [[ ! -f "$LOCK_FILE" ]]; then
-    touch "$LOCK_FILE"
-    run
-  else
-    ${EWW_BIN} close musicplayer
-    rm "$LOCK_FILE"
-  fi
-}
-
 # Function: Toggle the notification popup
 notification() {
   LOCK_FILE="$HOME/.cache/eww-notification.lock" # Lock file for notification window
@@ -119,20 +97,16 @@ screenshot() {
 
 # Handle passed argument to trigger specific window or command
 if [ "$1" = "wifi" ]; then
-  # Open terminal-based network manager
   kitty -e nmtui
 elif [ "$1" = "audio" ]; then
-  # Open PulseAudio control panel
   pavucontrol
 elif [ "$1" = "calendar" ]; then
   calendar
-elif [ "$1" = "music" ]; then
-  musicplayer
 elif [ "$1" = "ncmpcpp" ]; then
-  # Close musicplayer if open, then open ncmpcpp in terminal
-  if [[ -f "$HOME/.cache/eww-music.lock" ]]; then
-    ${EWW_BIN} close musicplayer
-    rm "$HOME/.cache/eww-music.lock"
+  # Close notification if open, then open ncmpcpp in terminal
+  if [[ -f "$HOME/.cache/eww-notification.lock" ]]; then
+    ${EWW_BIN} close notification
+    rm "$HOME/.cache/eww-notification.lock"
   fi
   kitty -e ncmpcpp
 elif [ "$1" = "notification" ]; then

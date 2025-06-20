@@ -3,45 +3,45 @@
 ;; Maintaned by https://github.com/humanwhodebugs
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                 Variables                 ;;
+;;               Variables                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; EWW Variable ;;
+;; EWW Variable
 (defvar eww "$HOME/.local/bin/eww")
 
-;; System Variables ;;
+;; System Variables
 (defvar bright false)
 (defvar power false)
 (defvar time false)
 (defvar volume false)
 
-;; Polling Variables ;;
-(defpoll battery            :interval "30s"  "scripts/battery icon")
-(defpoll battery-capacity   :interval "30s"  "scripts/battery percent")
-(defpoll calendar_day       :interval "10h"  "date '+%d'")
-(defpoll day_name           :interval "10h"  "date '+%A'")
-(defpoll calendar_month     :interval "10h"  "scripts/calendar")
-(defpoll month_name         :interval "10h"  "date '+%b'")
-(defpoll calendar_year      :interval "10h"  "date '+%Y'")
-(defpoll current-brightness :interval "3s"   "brightnessctl -d intel_backlight | awk -F'[()]' '/Current brightness/ {gsub(\"%\", \"\", $2); print $2}'")
-(defpoll current-volume     :interval "3s"   "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'")
-(defpoll hour               :interval "30s"  "date '+%H'")
-(defpoll min                :interval "30s"  "date '+%M'")
-(defpoll music-artist       :interval "3s"   "scripts/music --music-artist")
-(defpoll music-title        :interval "3s"   "scripts/music --music-title")
-(defpoll music-cover        :interval "3s"   "scripts/music --music-cover")
-(defpoll music-status       :interval "3s"   "scripts/music --music-status")
-(defpoll music-progress     :interval "3s"   "scripts/music --music-progress")
-(defpoll notifications      :interval "3s"   :initial "{ \"notifications\": [] }" "scripts/notifications")
-(defpoll wifi-icon          :interval "10s"  "scripts/wifi icon")
-(defpoll wifi-name          :interval "10s"  "scripts/wifi name")
-(defpoll workspaces         :interval "1s"   :initial "[]" "~/.config/eww/scripts/workspace")
+;; Polling Variables
+(defpoll battery              :interval "30s" "scripts/battery icon")
+(defpoll battery-capacity     :interval "30s" "scripts/battery percent")
+(defpoll calendar_day         :interval "10h" "date '+%d'")
+(defpoll day_name             :interval "10h" "date '+%A'")
+(defpoll calendar_month       :interval "10h" "scripts/calendar")
+(defpoll month_name           :interval "10h" "date '+%b'")
+(defpoll calendar_year        :interval "10h" "date '+%Y'")
+(defpoll current-brightness   :interval "3s"  "brightnessctl -d intel_backlight | awk -F'[()]' '/Current brightness/ {gsub(\"%\", \"\", $2); print $2}'")
+(defpoll current-volume       :interval "3s"  "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'")
+(defpoll hour                 :interval "30s" "date '+%H'")
+(defpoll min                  :interval "30s" "date '+%M'")
+(defpoll music-artist         :interval "3s"  "scripts/music --music-artist")
+(defpoll music-title          :interval "3s"  "scripts/music --music-title")
+(defpoll music-cover          :interval "3s"  "scripts/music --music-cover")
+(defpoll music-status         :interval "3s"  "scripts/music --music-status")
+(defpoll music-progress       :interval "3s"  "scripts/music --music-progress")
+(defpoll notifications        :interval "3s"  :initial "{ \"notifications\": [] }" "scripts/notifications")
+(defpoll wifi-icon            :interval "10s" "scripts/wifi icon")
+(defpoll wifi-name            :interval "10s" "scripts/wifi name")
+(defpoll workspaces           :interval "1s"  :initial "[]" "~/.config/eww/scripts/workspace")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                  Widgets                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Widgets                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Battery Widget ;;
+;; Battery Widget
 (defwidget bat []
   (box :orientation "v"
        :space-evenly "false"
@@ -49,7 +49,7 @@
            :text battery
            :tooltip "Battery: ${battery-capacity}%")))
 
-;; Brightness Widgets ;;
+;; Brightness Widgets
 (defwidget bright []
   (eventbox :onhover "${eww} update bright=true"
             :onhoverlost "${eww} update bright=false"
@@ -70,7 +70,7 @@
       (label :class "brightness-icon"
              :text "✹"))))
 
-;; Calendar Widgets ;;
+;; Calendar Widgets
 (defwidget cal []
   (box :class "cal-box"
        :orientation "v"
@@ -80,7 +80,7 @@
                 :month calendar_month
                 :year calendar_year))))
 
-;; Clock Widgets ;;
+;; Clock Widgets
 (defwidget time []
   (eventbox :onhover "${eww} update time=true"
             :onhoverlost "${eww} update time=false"
@@ -97,66 +97,16 @@
                    :icon-size 17
                    :orientation "v"
                    :spacing 5)
-          (button :class "music-icon"
-                  :onclick "scripts/popup music"
-                  "")
           (button :class "screenrecord-icon"
                   :onclick "scripts/popup screenrecord"
                   "◉")
           (button :class "screenshot-icon"
                   :onclick "scripts/popup screenshot"
                   "󰙠")))
-      (button :onclick "scripts/popup calendar"
-              hour)
-      (button :onclick "scripts/popup calendar"
-              min))))
+      (button :onclick "scripts/popup calendar" hour)
+      (button :onclick "scripts/popup calendar" min))))
 
-;; Music Player Widgets ;;
-(defwidget music-widget []
-  (box :orientation "h"
-       :space-evenly "false"
-       :spacing 0
-       :valign "center"
-    (button :class "album_art"
-            :onclick "scripts/popup ncmpcpp"
-            :style "background-image: url('${music-cover}');")
-    (box :class "musicbox"
-         :orientation "v"
-         :space-evenly "false"
-         :spacing 0
-      (label :halign "center"
-             :limit-width 15
-             :text music-artist
-             :wrap "false")
-      (label :halign "center"
-             :limit-width 15
-             :text music-title
-             :wrap "false")
-      (box :class "progress-container"
-           :hexpand "false"
-           :orientation "h"
-           :vexpand "false"
-        (progress :class "music-progress"
-                  :max 50
-                  :orientation "h"
-                  :value music-progress))
-      (box :class "musicbuttons"
-           :halign "center"
-           :orientation "h"
-           :space-evenly "false"
-           :spacing 10
-           :valign "center"
-        (button :class "trackbutton"
-                :onclick "scripts/music --music-prev"
-                :style "background-image: url('icons/music/previous-button.png');")
-        (button :class "playbutton"
-                :onclick "scripts/music --music-toggle"
-                :style "background-image: url('${music-status}');")
-        (button :class "trackbutton"
-                :onclick "scripts/music --music-next"
-                :style "background-image: url('icons/music/next-button.png');")))))
-
-;; Powermenu Widgets ;;
+;; Powermenu Widgets
 (defwidget power []
   (eventbox :onhover "${eww} update power=true"
             :onhoverlost "${eww} update power=false"
@@ -186,7 +136,7 @@
               :tooltip "Shutdown"
               ""))))
 
-;; Profile Widgets ;;
+;; Profile Widgets
 (defwidget profile-widget []
   (box :halign "center"
        :orientation "v"
@@ -196,32 +146,89 @@
             :onclick "scripts/popup notification"
             "")))
 
-;; Profile Section Widgets ;;
+;; Profile Section Widgets
 (defwidget notification-section []
   (box :class "notification-section"
        :orientation "v"
        :space-evenly false
-       :spacing 10
+       :spacing 15
     (box :class "profile-info"
          :orientation "h"
+         :spacing 20
+      (box :class "avatar-bg"
+           :orientation "v"
         (image :class "avatar"
                :halign "start"
-               :style "background-image: url('icons/profile.jpg');")
-        (box :orientation "v"
-             :space-evenly false
-             :valign "center"
+               :style "background-image: url('icons/profile.jpg');"))
+      (box :orientation "v"
+           :spacing 10
+        (box :class "profile-date-bg"
+             :orientation "v"
           (box :orientation "h"
-               :space-evenly false
-               :spacing 10
                :halign "center"
             (button :class "profile-date"
-                    :onclick "scripts/popup calendar" calendar_day)
+                    :onclick "scripts/popup calendar" month_name)
             (button :class "profile-date"
-                    :onclick "scripts/popup calendar" month_name))
+                    :onclick "scripts/popup calendar" calendar_day)))
+          (box :class "profile-date-bg"
             (button :class "profile-date"
-                    :onclick "scripts/popup calendar" day_name)
-            (button :class "profile-date"
-                    :onclick "scripts/popup calendar" calendar_year)))
+                    :onclick "scripts/popup calendar" day_name))))
+    (box :class "profile-date-bg"
+      (label :text "Notification Widget"))
+    (box :class "panel-info"
+         :orientation "h"
+         :spacing 20
+      (box :class "profile-date-bg"
+        (label :text "Stats Panel" ))
+      (box :orientation "v"
+           :spacing 10
+        (label :class "profile-date-bg"
+               :text "TODO")
+        (label :class "profile-date-bg"
+               :text "Weather")))
+    (box :class "musicplayer"
+         :orientation "h"
+         :space-evenly "false"
+         :spacing 0
+         :valign "center"
+      (button :class "album_art"
+              :onclick "scripts/popup ncmpcpp"
+              :style "background-image: url('${music-cover}');")
+      (box :class "musicbox"
+           :orientation "v"
+           :space-evenly "false"
+           :spacing 0
+        (label :halign "center"
+               :limit-width 15
+               :text music-artist
+               :wrap "false")
+        (label :halign "center"
+               :limit-width 15
+               :text music-title
+               :wrap "false")
+        (box :class "progress-container"
+             :hexpand "false"
+             :orientation "h"
+             :vexpand "false"
+          (progress :class "music-progress"
+                    :max 50
+                    :orientation "h"
+                    :value music-progress))
+        (box :class "musicbuttons"
+             :halign "center"
+             :orientation "h"
+             :space-evenly "false"
+             :spacing 10
+             :valign "center"
+          (button :class "trackbutton"
+                  :onclick "scripts/music --music-prev"
+                  :style "background-image: url('icons/music/previous-button.png');")
+          (button :class "playbutton"
+                  :onclick "scripts/music --music-toggle"
+                  :style "background-image: url('${music-status}');")
+          (button :class "trackbutton"
+                  :onclick "scripts/music --music-next"
+                  :style "background-image: url('icons/music/next-button.png');"))))
     (box :class "notifications-container"
          :orientation "v"
          :space-evenly false
@@ -249,17 +256,17 @@
                    :wrap true
                    :xalign 0)))))))
 
-;; Screenrecord Widgets ;;
+;; Screenrecord Widgets
 (defwidget screenrecord-widget []
   (box :class "screenrecord"
-       :orientation "v"
+       :orientation "h"
     (box
       (label :class "screen-text"
              :halign "left"
-             :text "Screen Recorder"
+             :text "Screenrecord"
              :valign "top"))
     (box :class "button-box"
-         :orientation "h"
+         :orientation "v"
          :spacing 10
       (button :class "screen-button"
               :onclick "scripts/screenrecord --start-record"
@@ -268,17 +275,17 @@
               :onclick "scripts/screenrecord --stop-record"
               "Stop"))))
 
-;; Screenshot Widgets ;;
+;; Screenshot Widgets
 (defwidget screenshot-widget []
   (box :class "screenshot"
-       :orientation "v"
+       :orientation "h"
     (box
       (label :class "screen-text"
              :halign "left"
              :text "Screenshot"
              :valign "top"))
     (box :class "button-box"
-         :orientation "h"
+         :orientation "v"
          :spacing 10
       (button :class "screen-button"
               :onclick "scripts/screenshot --area"
@@ -287,7 +294,7 @@
               :onclick "scripts/screenshot --desktop"
               "Desktop"))))
 
-;; Volume Widgets ;;
+;; Volume Widgets
 (defwidget volume []
   (eventbox :onhover "${eww} update volume=true"
             :onhoverlost "${eww} update volume=false"
@@ -309,7 +316,7 @@
               :onclick "scripts/popup audio"
               ""))))
 
-;; Wifi Widgets ;;
+;; Wifi Widgets
 (defwidget wifi []
   (box :orientation "v"
        :tooltip wifi-name
@@ -317,7 +324,7 @@
             :onclick "scripts/popup wifi"
             wifi-icon)))
 
-;; Workspaces Widget ;;
+;; Workspaces Widget
 (defwidget workspaces []
   (box :class "workspaces"
        :orientation "v"
@@ -326,13 +333,13 @@
     (for workspace in workspaces
       (button :class {workspace.current ? "current" : workspace.occupied ? "occupied" : ""}
               :onclick "bspc desktop -f ${workspace.id}"
-        {workspace.icon}))))
+              {workspace.icon}))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                Grouped Widget               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Grouped Widget              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Bar Widgets ;;
+;; Bar Widgets
 (defwidget bar []
   (box :class "bar"
        :hexpand "false"
@@ -341,14 +348,14 @@
     (top)
     (end)))
 
-;; Bottom Widgets ;;
+;; Bottom Widgets
 (defwidget bottom []
   (box :orientation "v"
        :space-evenly false
     (time)
     (power)))
 
-;; Control Panel Widgets ;;
+;; Control Panel Widgets
 (defwidget control []
   (box :class "control"
        :orientation "v"
@@ -358,7 +365,7 @@
     (bright)
     (volume)))
 
-;; End Widgets ;;
+;; End Widgets
 (defwidget end []
   (box :orientation "v"
        :space-evenly "false"
@@ -367,7 +374,7 @@
     (control)
     (bottom)))
 
-;; Top Widgets ;;
+;; Top Widgets
 (defwidget top []
   (box :orientation "v"
        :space-evenly false
@@ -375,61 +382,53 @@
     (profile-widget)
     (workspaces)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                  Windows                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Windows                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Bar Windows ;;
+;; Bar Windows
 (defwindow sidebar
   :monitor 0
   :geometry (geometry :x "11px"
-  :y "0px"
-  :width "38px"
-  :height "750px"
-  :anchor "left center")
+                      :y "0px"
+                      :width "38px"
+                      :height "750px"
+                      :anchor "left center")
   :stacking "fg"
   :reserve (struts :distance "50px" :side "left")
   :wm-ignore false
   :windowtype "dock"
   :exclusive true
-(bar))
+  (bar))
 
-;; Calendar Windows ;;
+;; Calendar Windows
 (defwindow calendar
   :geometry (geometry :x "60px"
-  :y "538px"
-  :width "250px"
-  :height "60px")
+                      :y "538px"
+                      :width "250px"
+                      :height "60px")
   (cal))
 
-;; Music Windows ;;
-(defwindow musicplayer
-  :geometry (geometry :x "60px"
-  :y "587px"
-  :width "250px"
-  :height "126px")
-(music-widget))
-
-;; Notification Windows ;;
+;; Notification Windows
 (defwindow notification
   :geometry (geometry :x "60px"
-  :y "10px"
-  :width "250px"
-  :height "60px")
-(notification-section))
+                      :y "10px"
+                      :width "270px"
+                      :height "748px")
+  (notification-section))
 
-;; Screenrecord Windows ;;
+;; Screenrecord Windows
 (defwindow screenrecord
   :geometry (geometry :x "60px"
-  :y "587px"
-  :width "250px"
-  :height "126px")
-(screenrecord-widget))
+                      :y "613px"
+                      :width "250px"
+                      :height "100px")
+  (screenrecord-widget))
 
-;; Screenshot Windows ;;
+;; Screenshot Windows
 (defwindow screenshot
   :geometry (geometry :x "60px"
-  :y "587px"
-  :width "250px"
-  :height "126px")
-(screenshot-widget))
+                      :y "613px"
+                      :width "250px"
+                      :height "100px")
+  (screenshot-widget))
