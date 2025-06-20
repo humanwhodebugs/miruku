@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Set your city here
+CITY="KualaKapuas"
+
+# Fetch the weather data from wttr.in
+WEATHER_DATA=$(curl -s "https://wttr.in/${CITY}?format=j1")
+
+# If curl failed, exit gracefully
+if [ $? -ne 0 ]; then
+    echo '{"text": "N/A", "tooltip": "Failed to fetch weather data"}'
+    exit 1
+fi
+
+# Extract the current condition
+CURRENT_CONDITION=$(echo "$WEATHER_DATA" | jq -r '.current_condition[0]')
+
+# Extract specific details
+TEMP_C=$(echo "$CURRENT_CONDITION" | jq -r '.temp_C')
+WEATHER_DESC=$(echo "$CURRENT_CONDITION" | jq -r '.weatherDesc[0].value')
+FEELS_LIKE_C=$(echo "$CURRENT_CONDITION" | jq -r '.FeelsLikeC')
+HUMIDITY=$(echo "$CURRENT_CONDITION" | jq -r '.humidity')
+
+# A simple case statement to get an icon for the weather
+WEATHER_ICON=""
+case $(echo "$WEATHER_DESC" | tr '[:upper:]' '[:lower:]') in
+    *sunny*|*clear*)
+        WEATHER_ICON="☀️"
+        ;;
+    *partly*cloudy*)
+        WEATHER_ICON="⛅"
+        ;;
+    *cloudy*)
+        WEATHER_ICON="☁️"
+        ;;
+    *rain*|*shower*)
+        WEATHER_ICON="🌧️"
+        ;;
+    *storm*|*thunder*)
+        WEATHER_ICON="⛈️"
+        ;;
+    *snow*)
+        WEATHER_ICON="❄️"
+        ;;
+    *mist*|*fog*)
+        WEATHER_ICON="🌫️"
+        ;;
+    *)
+        WEATHER_ICON="?" # Default icon
+        ;;
+esac
+
+# Format the output as a JSON object for EWW
+echo "{\"icon\": \"$WEATHER_ICON\", \"temp\": \"$TEMP_C\", \"desc\": \"$WEATHER_DESC\", \"feels_like\": \"$FEELS_LIKE_C\", \"humidity\": \"$HUMIDITY%\"}"
