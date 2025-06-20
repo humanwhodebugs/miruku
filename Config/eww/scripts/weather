@@ -3,7 +3,7 @@
 # Maintained by humanwhodebugs
 
 # City for which to fetch weather data
-CITY="Kuala+Kapuas"
+CITY="Kapuas"
 
 # Function: Determines a weather icon based on the weather description string.
 # - Takes a weather description as its first argument.
@@ -65,7 +65,7 @@ generate_json() {
   WEATHER_ICON=$(get_weather_icon "$WEATHER_DESC")
 
   # Format the output as a JSON object for EWW
-  echo "{\"icon\": \"$WEATHER_ICON\", \"temp\": \"$TEMP_C\", \"desc\": \"$WEATHER_DESC\", \"feels_like\": \"$FEELS_LIKE_C\", \"humidity\": \"$HUMIDITY%\"}"
+  echo "{\"icon\": \"$WEATHER_ICON\", \"temp\": \"$TEMP_C\", \"desc\": \"$WEATHER_DESC\", \"city\": \"$CITY\", \"feels_like\": \"$FEELS_LIKE_C\", \"humidity\": \"$HUMIDITY%\"}"
 }
 
 # Main execution

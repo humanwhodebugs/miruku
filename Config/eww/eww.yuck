@@ -235,7 +235,7 @@
         (box :class "panel-bg"
              :orientation "v"
              :space-evenly false
-             :tooltip "${weather.desc}, feels like ${weather.feels_like}°C"
+             :tooltip "${weather.city}, feels like ${weather.feels_like}°C"
           (label :halign "start"
                  :text "${weather.desc}")
           (label :halign "start"
