@@ -3,4 +3,4 @@
 # Maintained by humanwhodebugs
 
 # Get the five most recent notifications and format them as JSON
-dunstctl history | jq -r '.data[0][0:3] | map({summary: .summary.data, body: .body.data}) | {"notifications": .}'
+dunstctl history | jq -r '.data[0][0:2] | map({summary: .summary.data, body: .body.data}) | {"notifications": .}'

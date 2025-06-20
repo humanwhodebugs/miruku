@@ -107,6 +107,50 @@ $yellow: #df8e1d;
 }
 
 // ============================================
+// Calendar Widget
+// ============================================
+.cal-box {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $text;
+  font-size: 1em;
+  font-weight: bold;
+  .cal-inner-box {
+    padding: 0.5rem 0.2rem 0.2rem;
+    .cal {
+      padding: 0.48rem 0.25rem 0rem;
+      &.highlight {
+        padding: 0rem;
+      }
+    }
+  }
+}
+
+calendar {
+  color: $mantle;
+  &.header {
+    color: $text;
+    font-weight: bold;
+  }
+  &.button {
+    color: $text;
+  }
+  &.highlight {
+    color: $text;
+    font-weight: bold;
+  }
+  &:selected {
+    color: $blue;
+  }
+  &:indeterminate {
+    color: $text;
+  }
+  day {
+    color: $text;
+  }
+}
+
+// ============================================
 // Container Elements
 // ============================================
 .bar {
@@ -132,20 +176,16 @@ menu {
   color: $text;
   font-size: 13px;
   padding: 5px;
-
   menuitem {
     border-radius: 6px;
     padding: 8px 12px;
-
     &:hover {
       background-color: $blue;
     }
   }
-
   separator {
     background-color: $text;
     padding-top: 1px;
-
     &:last-child {
       padding: unset;
     }
@@ -158,129 +198,12 @@ tooltip {
 }
 
 // ============================================
-// Scale Elements
-// ============================================
-.bribar trough highlight {
-  background-color: $mantle;
-  border-radius: 6px;
-}
-
-.volbar trough highlight {
-  background-color: $mantle;
-  border-radius: 6px;
-}
-
-scale trough {
-  all: unset;
-  background-color: $text;
-  border-radius: 6px;
-  margin-left: 2px;
-  min-height: 80px;
-  min-width: 9px;
-}
-
-// ============================================
-// UI Elements
-// ============================================
-.control {
-  background-color: $surface2;
-  border-radius: 6px;
-  margin: 5px;
-}
-
-.time {
-  background-color: $surface2;
-  border-radius: 6px;
-  color: $mantle;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 5px;
-  padding-bottom: 3px;
-  padding-top: 3px;
-}
-
-// ============================================
-// Workspace Controls
-// ============================================
-.workspaces {
-  background-color: $surface2;
-  border-radius: 6px;
-  color: $mantle;
-  font-size: 20px;
-  margin: 5px;
-  padding: 2px;
-
-  button {
-    &.current {
-      padding-right: 2px;
-    }
-
-    &.occupied {
-      color: $text;
-    }
-  }
-}
-
-// ============================================
-// Calendar Widget
-// ============================================
-.cal-box {
-  background-color: $surface2;
-  border-radius: 6px;
-  color: $text;
-  font-size: 1em;
-  font-weight: bold;
-
-  .cal-inner-box {
-    padding: 0.5rem 0.2rem 0.2rem;
-
-    .cal {
-      padding: 0.48rem 0.25rem 0rem;
-
-      &.highlight {
-        padding: 0rem;
-      }
-    }
-  }
-}
-
-calendar {
-  color: $mantle;
-
-  &:selected {
-    color: $blue;
-  }
-
-  &.header {
-    color: $text;
-    font-weight: bold;
-  }
-
-  &.button {
-    color: $text;
-  }
-
-  &.highlight {
-    color: $text;
-    font-weight: bold;
-  }
-
-  &:indeterminate {
-    color: $text;
-  }
-
-  day {
-    color: $text;
-  }
-}
-
-// ============================================
 // Music Player Widget
 // ============================================
 .album_art {
   background-repeat: no-repeat;
   background-size: 90px;
-  margin-left: 10px;
+  margin-left: 12px;
   min-height: 90px;
   min-width: 90px;
 }
@@ -316,17 +239,17 @@ calendar {
   padding: 8px 2px;
 }
 
-.progress-container {
-  min-width: 120px;
-  padding-top: 4px;
-}
-
 .playbutton {
   background-repeat: no-repeat;
   background-size: 24px;
   margin: 0px;
   min-height: 24px;
   min-width: 24px;
+}
+
+.progress-container {
+  min-width: 120px;
+  padding-top: 4px;
 }
 
 .trackbutton {
@@ -358,12 +281,6 @@ calendar {
   font-weight: bold;
 }
 
-.notifications-container {
-  background-color: $mantle;
-  border-radius: 6px;
-  padding: 5px;
-}
-
 .notification-header {
   padding: 0px 5px;
 }
@@ -378,11 +295,7 @@ calendar {
   background-color: $surface2;
   border-radius: 6px;
   color: $text;
-  padding: 11px;
-}
-
-.notifications-title {
-  font-weight: bold;
+  padding: 13px;
 }
 
 .notification-title {
@@ -390,35 +303,97 @@ calendar {
   font-weight: bold;
 }
 
+.notifications-container {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.notifications-title {
+  font-weight: bold;
+}
+
+.panel-bg {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 4px;
+}
+
 .profile-date {
+  color: $text;
   font-size: 15px;
-  font-weight: 600;
+}
+
+.stat-bar {
+  padding-bottom: 11px;
+  padding-top: 11px;
+  trough {
+    background-color: $surface2;
+    border-radius: 5px;
+    min-height: 190px;
+  }
+  progress {
+    border-radius: 5px;
+  }
+}
+
+.stat-bar-1 progress {
+  background-color: #61afef;
+}
+
+.stat-bar-2 progress {
+  background-color: #c678dd;
+}
+
+.stat-bar-3 progress {
+  background-color: #e5c07b;
+}
+
+.stat-bar-4 progress {
+  background-color: #98c379;
+}
+
+.todo-progress {
+  background-color: $surface2;
   color: $text;
 }
 
-.profile-date-bg {
-  background-color: $mantle;
-  border-radius: 6px;
+.todo-progress-container {
+  min-height: 75px;
+  min-width: 75px;
+  padding-bottom: 4px;
+  padding-top: 4px;
 }
 
-.profile-info {
-  padding: 0px;
-}
-
-.widget-battery {
-  font-size: 18px;
+.weather-icon {
+  font-size: 36px;
+  padding-right: 18px;
 }
 
 .widget-dnd {
   font-size: 24px;
 }
 
-.widget-wifi {
-  font-size: 16px;
+// ============================================
+// Scale Elements
+// ============================================
+.bribar trough highlight {
+  background-color: $mantle;
+  border-radius: 6px;
 }
 
-.widget-volume {
-  font-size: 18px;
+scale trough {
+  all: unset;
+  background-color: $text;
+  border-radius: 6px;
+  margin-left: 2px;
+  min-height: 80px;
+  min-width: 9px;
+}
+
+.volbar trough highlight {
+  background-color: $mantle;
+  border-radius: 6px;
 }
 
 // ============================================
@@ -426,9 +401,14 @@ calendar {
 // ============================================
 .screen-button {
   background-color: $mantle;
-  color: $text;
   border-radius: 6px;
+  color: $text;
   font-size: 12px;
+  font-weight: bold;
+}
+
+.screen-text {
+  color: $text;
   font-weight: bold;
 }
 
@@ -444,7 +424,42 @@ calendar {
   padding: 12px;
 }
 
-.screen-text {
-  color: $text;
+// ============================================
+// UI Elements
+// ============================================
+.control {
+  background-color: $surface2;
+  border-radius: 6px;
+  margin: 5px;
+}
+
+.time {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $mantle;
+  font-size: 15px;
   font-weight: bold;
+  margin: 5px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+// ============================================
+// Workspace Controls
+// ============================================
+.workspaces {
+  background-color: $surface2;
+  border-radius: 6px;
+  color: $mantle;
+  font-size: 20px;
+  margin: 5px;
+  padding: 2px;
+  button {
+    &.current {
+      padding-right: 2px;
+    }
+    &.occupied {
+      color: $text;
+    }
+  }
 }

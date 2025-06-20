@@ -1,54 +1,74 @@
 #!/bin/sh
+# A script for eww to fetch and display weather information from wttr.in.
+# Maintained by humanwhodebugs
 
-# Set your city here
-CITY="KualaKapuas"
+# City for which to fetch weather data
+CITY="Kuala+Kapuas"
 
-# Fetch the weather data from wttr.in
-WEATHER_DATA=$(curl -s "https://wttr.in/${CITY}?format=j1")
+# Function: Determines a weather icon based on the weather description string.
+# - Takes a weather description as its first argument.
+# - Returns a single character icon.
+get_weather_icon() {
+  case $(echo "$1" | tr '[:upper:]' '[:lower:]') in
+  *sunny* | *clear*)
+    echo "" # Sunny/Clear
+    ;;
+  *partly*cloudy*)
+    echo "" # Partly Cloudy
+    ;;
+  *cloudy*)
+    echo "" # Cloudy
+    ;;
+  *rain* | *shower*)
+    echo "" # Rain/Showers
+    ;;
+  *storm* | *thunder*)
+    echo "" # Storm/Thunder
+    ;;
+  *snow*)
+    echo "" # Snow
+    ;;
+  *mist* | *fog*)
+    echo "" # Mist/Fog
+    ;;
+  *)
+    echo "?" # Default icon
+    ;;
+  esac
+}
 
-# If curl failed, exit gracefully
-if [ $? -ne 0 ]; then
-    echo '{"text": "N/A", "tooltip": "Failed to fetch weather data"}'
+# Function: Fetches, parses, and formats weather data into a JSON object.
+# - Fetches data from wttr.in for the specified CITY.
+# - Parses JSON response using jq.
+# - Calls get_weather_icon to determine the correct icon.
+# - Echoes the final JSON string for EWW.
+generate_json() {
+  # Fetch the weather data from wttr.in
+  WEATHER_DATA=$(curl -s "https://wttr.in/${CITY}?format=j1")
+
+  # If curl failed, exit gracefully
+  if [ $? -ne 0 ]; then
+    echo '{"icon": "!", "desc": "N/A"}'
     exit 1
-fi
+  fi
 
-# Extract the current condition
-CURRENT_CONDITION=$(echo "$WEATHER_DATA" | jq -r '.current_condition[0]')
+  # Extract the current condition object
+  CURRENT_CONDITION=$(echo "$WEATHER_DATA" | jq -r '.current_condition[0]')
 
-# Extract specific details
-TEMP_C=$(echo "$CURRENT_CONDITION" | jq -r '.temp_C')
-WEATHER_DESC=$(echo "$CURRENT_CONDITION" | jq -r '.weatherDesc[0].value')
-FEELS_LIKE_C=$(echo "$CURRENT_CONDITION" | jq -r '.FeelsLikeC')
-HUMIDITY=$(echo "$CURRENT_CONDITION" | jq -r '.humidity')
+  # Extract specific details from the condition object
+  TEMP_C=$(echo "$CURRENT_CONDITION" | jq -r '.temp_C')
+  WEATHER_DESC=$(echo "$CURRENT_CONDITION" | jq -r '.weatherDesc[0].value')
+  FEELS_LIKE_C=$(echo "$CURRENT_CONDITION" | jq -r '.FeelsLikeC')
+  HUMIDITY=$(echo "$CURRENT_CONDITION" | jq -r '.humidity')
 
-# A simple case statement to get an icon for the weather
-WEATHER_ICON=""
-case $(echo "$WEATHER_DESC" | tr '[:upper:]' '[:lower:]') in
-    *sunny*|*clear*)
-        WEATHER_ICON="☀️"
-        ;;
-    *partly*cloudy*)
-        WEATHER_ICON="⛅"
-        ;;
-    *cloudy*)
-        WEATHER_ICON="☁️"
-        ;;
-    *rain*|*shower*)
-        WEATHER_ICON="🌧️"
-        ;;
-    *storm*|*thunder*)
-        WEATHER_ICON="⛈️"
-        ;;
-    *snow*)
-        WEATHER_ICON="❄️"
-        ;;
-    *mist*|*fog*)
-        WEATHER_ICON="🌫️"
-        ;;
-    *)
-        WEATHER_ICON="?" # Default icon
-        ;;
-esac
+  # Get the corresponding weather icon
+  WEATHER_ICON=$(get_weather_icon "$WEATHER_DESC")
 
-# Format the output as a JSON object for EWW
-echo "{\"icon\": \"$WEATHER_ICON\", \"temp\": \"$TEMP_C\", \"desc\": \"$WEATHER_DESC\", \"feels_like\": \"$FEELS_LIKE_C\", \"humidity\": \"$HUMIDITY%\"}"
+  # Format the output as a JSON object for EWW
+  echo "{\"icon\": \"$WEATHER_ICON\", \"temp\": \"$TEMP_C\", \"desc\": \"$WEATHER_DESC\", \"feels_like\": \"$FEELS_LIKE_C\", \"humidity\": \"$HUMIDITY%\"}"
+}
+
+# Main execution
+generate_json
+
+exit 0

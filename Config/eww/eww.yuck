@@ -2,9 +2,9 @@
 ;; Designed  by https://github.com/humanwhodebugs
 ;; Maintaned by https://github.com/humanwhodebugs
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Variables                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;         Variables         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; EWW Variable
 (defvar eww "$HOME/.local/bin/eww")
@@ -16,32 +16,35 @@
 (defvar volume false)
 
 ;; Polling Variables
-(defpoll battery              :interval "30s" "scripts/battery icon")
-(defpoll battery-capacity     :interval "30s" "scripts/battery percent")
-(defpoll calendar_day         :interval "10h" "date '+%d'")
-(defpoll day_name             :interval "10h" "date '+%A'")
-(defpoll calendar_month       :interval "10h" "scripts/calendar")
-(defpoll month_name           :interval "10h" "date '+%b'")
-(defpoll calendar_year        :interval "10h" "date '+%Y'")
-(defpoll current-brightness   :interval "3s"  "brightnessctl -d intel_backlight | awk -F'[()]' '/Current brightness/ {gsub(\"%\", \"\", $2); print $2}'")
-(defpoll current-volume       :interval "3s"  "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'")
-(defpoll hour                 :interval "30s" "date '+%H'")
-(defpoll min                  :interval "30s" "date '+%M'")
-(defpoll music-artist         :interval "3s"  "scripts/music --music-artist")
-(defpoll music-title          :interval "3s"  "scripts/music --music-title")
-(defpoll music-cover          :interval "3s"  "scripts/music --music-cover")
-(defpoll music-status         :interval "3s"  "scripts/music --music-status")
-(defpoll music-progress       :interval "3s"  "scripts/music --music-progress")
-(defpoll notifications        :interval "3s"  :initial "{ \"notifications\": [] }" "scripts/notifications")
-(defpoll todo                 :interval "10s" "scripts/todo")
-(defpoll weather              :interval "15m" "scripts/weather")
-(defpoll wifi-icon            :interval "10s" "scripts/wifi icon")
-(defpoll wifi-name            :interval "10s" "scripts/wifi name")
-(defpoll workspaces           :interval "1s"  :initial "[]" "~/.config/eww/scripts/workspace")
+(defpoll battery            :interval "30s" "scripts/battery icon")
+(defpoll battery-capacity   :interval "30s" "scripts/battery percent")
+(defpoll calendar_day       :interval "10h" "date '+%d'")
+(defpoll day_name           :interval "10h" "date '+%A'")
+(defpoll calendar_month     :interval "10h" "scripts/calendar")
+(defpoll cpu_temp           :interval "5s"  "sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//;s/°C//' | awk '{printf \"%.0f\", $1}'")
+(defpoll disk_usage_root    :interval "10m" "df -h / | awk 'NR==2{print $5}' | sed 's/%//'")
+(defpoll month_name         :interval "10h" "date '+%b'")
+(defpoll calendar_year      :interval "10h" "date '+%Y'")
+(defpoll current-brightness :interval "3s"  "brightnessctl -d intel_backlight | awk -F'[()]' '/Current brightness/ {gsub(\"%\", \"\", $2); print $2}'")
+(defpoll current-volume     :interval "3s"  "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'")
+(defpoll hour               :interval "30s" "date '+%H'")
+(defpoll min                :interval "30s" "date '+%M'")
+(defpoll music-artist       :interval "3s"  "scripts/music --music-artist")
+(defpoll music-title        :interval "3s"  "scripts/music --music-title")
+(defpoll music-cover        :interval "3s"  "scripts/music --music-cover")
+(defpoll music-status       :interval "3s"  "scripts/music --music-status")
+(defpoll music-progress     :interval "3s"  "scripts/music --music-progress")
+(defpoll notifications      :interval "3s"  :initial "{ \"notifications\": [] }" "scripts/notifications")
+(defpoll ram_usage          :interval "3s"  "free -m | awk 'NR==2{printf \"%.0f\", $3*100/$2 }'")
+(defpoll todo               :interval "10s" "scripts/todo")
+(defpoll weather            :interval "15m" "scripts/weather")
+(defpoll wifi-icon          :interval "10s" "scripts/wifi icon")
+(defpoll wifi-name          :interval "10s" "scripts/wifi name")
+(defpoll workspaces         :interval "1s"  :initial "[]" "~/.config/eww/scripts/workspace")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Widgets                     ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;         Widgets        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Battery Widget
 (defwidget bat []
@@ -100,11 +103,9 @@
                    :orientation "v"
                    :spacing 5)
           (button :class "screenrecord-icon"
-                  :onclick "scripts/popup screenrecord"
-                  "◉")
+                  :onclick "scripts/popup screenrecord" "◉")
           (button :class "screenshot-icon"
-                  :onclick "scripts/popup screenshot"
-                  "󰙠")))
+                  :onclick "scripts/popup screenshot" "󰙠")))
       (button :onclick "scripts/popup calendar" hour)
       (button :onclick "scripts/popup calendar" min))))
 
@@ -123,20 +124,16 @@
              :space-evenly "false"
           (button :class "restart-icon"
                   :onclick "bspc wm -r"
-                  :tooltip "BSPWM Restart"
-                  "󰑓")
+                  :tooltip "BSPWM Restart" "󰑓")
           (button :class "logout-icon"
                   :onclick "killall bspwm"
-                  :tooltip "Logout"
-                  "⤫")
+                  :tooltip "Logout" "⤫")
           (button :class "reboot-icon"
                   :onclick "reboot"
-                  :tooltip "Reboot"
-                  "🗘")))
+                  :tooltip "Reboot" "🗘")))
       (button :class "shutdown-icon"
               :onclick "shutdown now"
-              :tooltip "Shutdown"
-              ""))))
+              :tooltip "Shutdown" ""))))
 
 ;; Profile Widgets
 (defwidget profile-widget []
@@ -145,15 +142,14 @@
        :space-evenly "false"
        :valign "center"
     (button :class "profile-icon"
-            :onclick "scripts/popup notification"
-            "")))
+            :onclick "scripts/popup notification" "")))
 
 ;; Profile Section Widgets
 (defwidget notification-section []
   (box :class "notification-section"
        :orientation "v"
        :space-evenly false
-       :spacing 15
+       :spacing 20
     (box :class "profile-info"
          :orientation "h"
          :spacing 20
@@ -164,88 +160,76 @@
                :style "background-image: url('icons/profile.jpg');"))
       (box :orientation "v"
            :spacing 10
-        (box :class "profile-date-bg"
+        (box :class "panel-bg"
              :orientation "v"
           (box :orientation "h"
                :halign "center"
             (button :class "profile-date"
                     :onclick "scripts/popup calendar" month_name)
             (button :class "profile-date"
-                    :onclick "scripts/popup calendar" calendar_day)))
-          (box :class "profile-date-bg"
-            (button :class "profile-date"
-                    :onclick "scripts/popup calendar" day_name))))
-    (box :class "profile-date-bg"
-      (label :class "widget-battery"
-             :text battery
-             :tooltip "Battery: ${battery-capacity}%")
-      (label :class "widget-dnd"
-             :text "⊝")
-      (button :class "widget-wifi"
-              :onclick "scripts/popup wifi"
-              :tooltip wifi-name
-              wifi-icon)
-      (label :class "widget-volume"
-             :text ""))
+                    :onclick "scripts/popup calendar" calendar_day))
+          (button :class "profile-date"
+                  :halign "center"
+                  :onclick "scripts/popup calendar" day_name))
+        (box :class "panel-bg"
+          (label :class "widget-dnd"
+                 :text "⊝"))))
     (box :class "panel-info"
          :orientation "h"
          :spacing 20
-      (box :class "profile-date-bg"
-(box :class "stats-module"
-       :orientation "v"
-       :space-evenly false
-       :spacing 15
-    ;; The "Stats" title
-    (label :text "Stats" :class "stats-title" :halign "start")
-
-    ;; The container for the four progress bars
-    (box :class "stats-bars-container"
-         :orientation "h"
-         :space-evenly "true"
-         :spacing 20
-         :halign "center"
-      ;; Bar 1 (Blue)
-      (progress :class "stat-bar stat-bar-1"
-                :flipped true
-                :orientation "v"
-                :value 80) ;; Static value from 0-100
-      ;; Bar 2 (Purple)
-      (progress :class "stat-bar stat-bar-2"
-                :flipped true
-                :orientation "v"
-                :value 50) ;; Static value from 0-100
-      ;; Bar 3 (Cyan)
-      (progress :class "stat-bar stat-bar-3"
-                :flipped true
-                :orientation "v"
-                :value 35) ;; Static value from 0-100
-      ;; Bar 4 (Green)
-      (progress :class "stat-bar stat-bar-4"
-                :flipped true
-                :orientation "v"
-                :value 65) ;; Static value from 0-100
-    )
-  )
-)
+      (box :class "panel-bg"
+        (box :class "stats-module"
+             :orientation "v"
+             :space-evenly false
+          (label :text "Stats" :class "stats-title" :halign "start")
+          (box :class "stats-bars-container"
+               :orientation "h"
+               :spacing 20
+               :halign "center"
+            (progress :class "stat-bar stat-bar-1"
+                      :flipped true
+                      :orientation "v"
+                      :value {battery-capacity}
+                      :tooltip "Battery: ${battery-capacity}%")
+            (progress :class "stat-bar stat-bar-2"
+                      :flipped true
+                      :orientation "v"
+                      :value {cpu_temp}
+                      :tooltip "CPU Temp: ${cpu_temp}°C")
+            (progress :class "stat-bar stat-bar-3"
+                      :flipped true
+                      :orientation "v"
+                      :value {disk_usage_root}
+                      :tooltip "Disk Usage: ${disk_usage_root}%")
+            (progress :class "stat-bar stat-bar-4"
+                      :flipped true
+                      :orientation "v"
+                      :value {ram_usage}
+                      :tooltip "RAM Usage: ${ram_usage}%"))))
       (box :orientation "v"
            :spacing 10
-      (box :class "profile-date-bg"
-           :orientation "v"
-           :spacing 10
-           :space-evenly "false"
-        (label :class "todo-title" :halign "start" :text "Todo")
-        (circular-progress :class "todo-progress"
-                           :value {todo.percentage}
-                           :thickness 1
-                           :start-at 75
-      (label :class "todo-fraction"
-             :text "${todo.completed}/${todo.total}")))
-        (box :class "profile-date-bg"
+        (box :class "panel-bg"
              :orientation "v"
-             :spacing 10
-             :tooltip "${weather.desc}, Feels like ${weather.feels_like}°C"
-           (label :class "weather-icon" :text "${weather.icon}")
-           (label :class "weather-temp" :text "${weather.temp}°C"))))
+             :space-evenly "false"
+          (box :orientation "h"
+            (label :class "todo-title" :halign "start" :text "Todo"))
+          (box :class "todo-progress-container" :halign "center"
+            (circular-progress :class "todo-progress"
+                               :value {todo.percentage}
+                               :thickness 6
+                               :start-at 75
+              (label :class "todo-fraction"
+                     :text "${todo.completed}/${todo.total}"))))
+        (box :class "panel-bg"
+             :orientation "v"
+             :space-evenly false
+             :tooltip "${weather.desc}, feels like ${weather.feels_like}°C"
+          (label :halign "start"
+                 :text "${weather.desc}")
+          (label :halign "start"
+                 :text "${weather.temp}°C")
+          (label :class "weather-icon"
+                 :text "${weather.icon}"))))
     (box :class "musicplayer"
          :orientation "h"
          :space-evenly "false"
@@ -292,6 +276,7 @@
     (box :class "notifications-container"
          :orientation "v"
          :space-evenly false
+         :spacing 10
       (box :class "notification-header"
            :orientation "h"
         (label :class "notifications-title"
@@ -299,11 +284,10 @@
                :text "Notifications")
         (button :class "clear-button"
                 :halign "end"
-                :onclick "dunstctl history-clear"
-                ""))
+                :onclick "dunstctl history-clear" ""))
       (box :orientation "v"
            :space-evenly false
-           :spacing 5
+           :spacing 15
         (for notif in {notifications.notifications}
           (box :class "notification-item"
                :orientation "v"
@@ -329,11 +313,9 @@
          :orientation "v"
          :spacing 10
       (button :class "screen-button"
-              :onclick "scripts/screenrecord --start-record"
-              "Start")
+              :onclick "scripts/screenrecord --start-record" "Start")
       (button :class "screen-button"
-              :onclick "scripts/screenrecord --stop-record"
-              "Stop"))))
+              :onclick "scripts/screenrecord --stop-record" "Stop"))))
 
 ;; Screenshot Widgets
 (defwidget screenshot-widget []
@@ -348,11 +330,9 @@
          :orientation "v"
          :spacing 10
       (button :class "screen-button"
-              :onclick "scripts/screenshot --area"
-              "Area")
+              :onclick "scripts/screenshot --area" "Area")
       (button :class "screen-button"
-              :onclick "scripts/screenshot --desktop"
-              "Desktop"))))
+              :onclick "scripts/screenshot --desktop" "Desktop"))))
 
 ;; Volume Widgets
 (defwidget volume []
@@ -373,8 +353,7 @@
                :tooltip "Volume: ${current-volume}%"
                :value current-volume))
       (button :class "volume-icon"
-              :onclick "scripts/popup audio"
-              ""))))
+              :onclick "scripts/popup audio" ""))))
 
 ;; Wifi Widgets
 (defwidget wifi []
@@ -396,7 +375,7 @@
               {workspace.icon}))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Grouped Widget              ;;
+;;         Grouped Widget                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Bar Widgets
@@ -443,7 +422,7 @@
     (workspaces)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Windows                     ;;
+;;         Windows                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Bar Windows
@@ -473,7 +452,7 @@
 (defwindow notification
   :geometry (geometry :x "60px"
                       :y "10px"
-                      :width "270px"
+                      :width "280px"
                       :height "748px")
   (notification-section))
 
