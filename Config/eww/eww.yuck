@@ -33,6 +33,7 @@
 (defpoll music-status         :interval "3s"  "scripts/music --music-status")
 (defpoll music-progress       :interval "3s"  "scripts/music --music-progress")
 (defpoll notifications        :interval "3s"  :initial "{ \"notifications\": [] }" "scripts/notifications")
+(defpoll todo                 :interval "10s" "scripts/todo")
 (defpoll weather              :interval "15m" "scripts/weather")
 (defpoll wifi-icon            :interval "10s" "scripts/wifi icon")
 (defpoll wifi-name            :interval "10s" "scripts/wifi name")
@@ -193,8 +194,17 @@
         (label :text "Stats Panel" ))
       (box :orientation "v"
            :spacing 10
-        (label :class "profile-date-bg"
-               :text "TODO")
+      (box :class "profile-date-bg"
+           :orientation "v"
+           :spacing 10
+           :space-evenly "false"
+        (label :class "todo-title" :halign "start" :text "Todo")
+        (circular-progress :class "todo-progress"
+                           :value {todo.percentage}
+                           :thickness 1
+                           :start-at 75
+      (label :class "todo-fraction"
+             :text "${todo.completed}/${todo.total}")))
         (box :class "profile-date-bg"
              :orientation "v"
              :spacing 10
