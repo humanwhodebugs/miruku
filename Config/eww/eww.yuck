@@ -191,7 +191,42 @@
          :orientation "h"
          :spacing 20
       (box :class "profile-date-bg"
-        (label :text "Stats Panel" ))
+(box :class "stats-module"
+       :orientation "v"
+       :space-evenly false
+       :spacing 15
+    ;; The "Stats" title
+    (label :text "Stats" :class "stats-title" :halign "start")
+
+    ;; The container for the four progress bars
+    (box :class "stats-bars-container"
+         :orientation "h"
+         :space-evenly "true"
+         :spacing 20
+         :halign "center"
+      ;; Bar 1 (Blue)
+      (progress :class "stat-bar stat-bar-1"
+                :flipped true
+                :orientation "v"
+                :value 80) ;; Static value from 0-100
+      ;; Bar 2 (Purple)
+      (progress :class "stat-bar stat-bar-2"
+                :flipped true
+                :orientation "v"
+                :value 50) ;; Static value from 0-100
+      ;; Bar 3 (Cyan)
+      (progress :class "stat-bar stat-bar-3"
+                :flipped true
+                :orientation "v"
+                :value 35) ;; Static value from 0-100
+      ;; Bar 4 (Green)
+      (progress :class "stat-bar stat-bar-4"
+                :flipped true
+                :orientation "v"
+                :value 65) ;; Static value from 0-100
+    )
+  )
+)
       (box :orientation "v"
            :spacing 10
       (box :class "profile-date-bg"
