@@ -48,369 +48,470 @@
 
 ;; Battery Widget
 (defwidget bat []
-  (box :orientation "v"
-       :space-evenly "false"
-    (label :class "bat"
-           :text battery
-           :tooltip "Battery: ${battery-capacity}%")))
+  (box
+    :orientation "v"
+    :space-evenly false
+    (label
+      :class "bat"
+      :text battery
+      :tooltip "Battery: ${battery-capacity}%")))
 
 ;; Brightness Widgets
 (defwidget bright []
-  (eventbox :onhover "${eww} update bright=true"
-            :onhoverlost "${eww} update bright=false"
-    (box :orientation "v"
-         :space-evenly "false"
-         :spacing 0
-      (revealer :duration "550ms"
-                :reveal bright
-                :transition "slideup"
-        (scale :class "bribar"
-               :flipped true
-               :max 100
-               :min 0
-               :onchange "brightnessctl set {}%"
-               :orientation "v"
-               :tooltip "Brightness: ${current-brightness}%"
-               :value current-brightness))
-      (label :class "brightness-icon"
-             :text "✹"))))
+  (eventbox
+    :onhover "${eww} update bright=true"
+    :onhoverlost "${eww} update bright=false"
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 0
+      (revealer
+        :duration "550ms"
+        :reveal bright
+        :transition "slideup"
+        (scale
+          :class "bribar"
+          :flipped true
+          :max 100
+          :min 0
+          :onchange "brightnessctl set {}%"
+          :orientation "v"
+          :tooltip "Brightness: ${current-brightness}%"
+          :value current-brightness))
+      (label
+        :class "brightness-icon"
+        :text ""))))
 
 ;; Calendar Widgets
 (defwidget cal []
-  (box :class "cal-box"
-       :orientation "v"
-    (box :class "cal-inner-box"
-      (calendar :class "cal"
-                :day calendar_day
-                :month calendar_month
-                :year calendar_year))))
+  (box
+    :class "cal-box"
+    :orientation "v"
+    (box
+      :class "cal-inner-box"
+      (calendar
+        :class "cal"
+        :day calendar_day
+        :month calendar_month
+        :year calendar_year))))
 
 ;; Clock Widgets
 (defwidget time []
-  (eventbox :onhover "${eww} update time=true"
-            :onhoverlost "${eww} update time=false"
-    (box :class "time"
-         :orientation "v"
-         :space-evenly "false"
-         :vexpand "false"
-      (revealer :duration "550ms"
-                :reveal time
-                :transition "slideup"
-        (box :orientation "v"
-             :space-evenly "false"
-          (systray :class "tray"
-                   :icon-size 17
-                   :orientation "v"
-                   :spacing 5)
-          (button :class "screenrecord-icon"
-                  :onclick "scripts/popup screenrecord" "◉")
-          (button :class "screenshot-icon"
-                  :onclick "scripts/popup screenshot" "󰙠")))
+  (eventbox
+    :onhover "${eww} update time=true"
+    :onhoverlost "${eww} update time=false"
+    (box
+      :class "time"
+      :orientation "v"
+      :space-evenly false
+      :vexpand false
+      (revealer
+        :duration "550ms"
+        :reveal time
+        :transition "slideup"
+        (box
+          :orientation "v"
+          :space-evenly false
+          (systray
+            :class "tray"
+            :icon-size 17
+            :orientation "v"
+            :spacing 5)
+          (button
+            :class "screenrecord-icon"
+            :onclick "scripts/popup screenrecord" "󰙠")
+          (button
+            :class "screenshot-icon"
+            :onclick "scripts/popup screenshot" "󰙠")))
       (button :onclick "scripts/popup calendar" hour)
       (button :onclick "scripts/popup calendar" min))))
 
 ;; Powermenu Widgets
 (defwidget power []
-  (eventbox :onhover "${eww} update power=true"
-            :onhoverlost "${eww} update power=false"
-    (box :class "powermenu"
-         :orientation "v"
-         :space-evenly "false"
-         :vexpand "false"
-      (revealer :duration "550ms"
-                :reveal power
-                :transition "slideup"
-        (box :orientation "v"
-             :space-evenly "false"
-          (button :class "restart-icon"
-                  :onclick "bspc wm -r"
-                  :tooltip "BSPWM Restart" "󰑓")
-          (button :class "logout-icon"
-                  :onclick "killall bspwm"
-                  :tooltip "Logout" "⤫")
-          (button :class "reboot-icon"
-                  :onclick "reboot"
-                  :tooltip "Reboot" "🗘")))
-      (button :class "shutdown-icon"
-              :onclick "shutdown now"
-              :tooltip "Shutdown" ""))))
+  (eventbox
+    :onhover "${eww} update power=true"
+    :onhoverlost "${eww} update power=false"
+    (box
+      :class "powermenu"
+      :orientation "v"
+      :space-evenly false
+      :vexpand false
+      (revealer
+        :duration "550ms"
+        :reveal power
+        :transition "slideup"
+        (box
+          :orientation "v"
+          :space-evenly false
+          (button
+            :class "restart-icon"
+            :onclick "bspc wm -r"
+            :tooltip "BSPWM Restart" "󰑓")
+          (button
+            :class "logout-icon"
+            :onclick "killall bspwm"
+            :tooltip "Logout" "⤫")
+          (button
+            :class "reboot-icon"
+            :onclick "reboot"
+            :tooltip "Reboot" "🗘")))
+      (button
+        :class "shutdown-icon"
+        :onclick "shutdown now"
+        :tooltip "Shutdown" ""))))
 
 ;; Profile Widgets
 (defwidget profile-widget []
-  (box :halign "center"
-       :orientation "v"
-       :space-evenly "false"
-       :valign "center"
-    (button :class "profile-icon"
-            :onclick "scripts/popup notification" "")))
+  (box
+    :halign "center"
+    :orientation "v"
+    :space-evenly false
+    :valign "center"
+    (button
+      :class "profile-icon"
+      :onclick "scripts/popup notification" "")))
 
 ;; Profile Section Widgets
 (defwidget notification-section []
-  (box :class "notification-section"
-       :orientation "v"
-       :space-evenly false
-       :spacing 20
-    (box :class "profile-info"
-         :orientation "h"
-         :spacing 10
-      (box :class "avatar-bg"
-           :orientation "v"
-        (image :class "avatar"
-               :halign "start"
-               :style "background-image: url('icons/profile.jpg');"))
-      (box :orientation "v"
-           :spacing 10
-        (box :class "panel-bg"
-             :orientation "v"
-          (box :orientation "h"
-               :halign "center"
-            (button :class "profile-date"
-                    :onclick "scripts/popup calendar" month_name)
-            (button :class "profile-date"
-                    :onclick "scripts/popup calendar" calendar_day))
-          (button :class "profile-date"
+  (box
+    :class "notification-section"
+    :orientation "v"
+    :space-evenly false
+    :spacing 15
+    (box
+      :class "main-panel"
+      :orientation "h"
+      :spacing 15
+      (box
+        :class "panel-1"
+        :orientation "v"
+        :spacing 15
+        :space-evenly false
+        (box
+          :class "avatar-bg"
+          (image
+            :class "avatar"
+            :halign "center"
+            :style "background-image: url('icons/profile.jpg');"))
+        (box
+          :class "panel-bg"
+          (box
+            :class "stats-module"
+            :orientation "v"
+            :space-evenly false
+            (label
+              :class "stats-title"
+              :halign "start"
+              :text "Stats")
+            (box
+              :class "stats-bars-container"
+              :orientation "h"
+              :spacing 20
+              :halign "center"
+              (progress
+                :class "stat-bar stat-bar-1"
+                :flipped true
+                :orientation "v"
+                :value {battery-capacity}
+                :tooltip "Battery: ${battery-capacity}%")
+              (progress
+                :class "stat-bar stat-bar-2"
+                :flipped true
+                :orientation "v"
+                :value {cpu_temp}
+                :tooltip "CPU Temp: ${cpu_temp}°C")
+              (progress
+                :class "stat-bar stat-bar-3"
+                :flipped true
+                :orientation "v"
+                :value {disk_usage_root}
+                :tooltip "Disk Usage: ${disk_usage_root}%")
+              (progress
+                :class "stat-bar stat-bar-4"
+                :flipped true
+                :orientation "v"
+                :value {ram_usage}
+                :tooltip "RAM Usage: ${ram_usage}%")))))
+      (box
+        :class "panel-2"
+        :orientation "v"
+        :spacing 15
+        :space-evenly false
+        (box
+          :class "panel-bg"
+          :orientation "v"
+          (button
+            :class "profile-day"
+            :halign "start"
+            :onclick "scripts/popup calendar" day_name)
+          (box
+            :orientation "h"
+            :halign "start"
+            (button
+              :class "profile-month"
+              :onclick "scripts/popup calendar" month_name)
+            (button
+              :class "profile-month"
+              :onclick "scripts/popup calendar" calendar_day)))
+        (box
+          :orientation "v"
+          :spacing 15
+          (box
+            :class "panel-bg"
+            :orientation "v"
+            :space-evenly false
+            (box
+              :orientation "h"
+              (button
+                :class "todo-title"
+                :halign "start"
+                :onclick "scripts/popup task" "Todo"))
+            (box
+              :class "todo-progress-container"
+              :halign "center"
+              (circular-progress
+                :class "todo-progress"
+                :value {todo.percentage}
+                :thickness 6
+                :start-at 75
+                (box
+                  :class "todo-count"
                   :halign "center"
-                  :onclick "scripts/popup calendar" day_name))
-        (box :class "panel-bg"
-          (label :class "widget-dnd"
-                 :text "⊝"))))
-    (box :class "panel-info"
-         :orientation "h"
-         :spacing 10
-      (box :class "panel-bg"
-        (box :class "stats-module"
-             :orientation "v"
-             :space-evenly false
-          (label :class "stats-title"
-                 :halign "start"
-                 :text "Stats")
-          (box :class "stats-bars-container"
-               :orientation "h"
-               :spacing 20
-               :halign "center"
-            (progress :class "stat-bar stat-bar-1"
-                      :flipped true
-                      :orientation "v"
-                      :value {battery-capacity}
-                      :tooltip "Battery: ${battery-capacity}%")
-            (progress :class "stat-bar stat-bar-2"
-                      :flipped true
-                      :orientation "v"
-                      :value {cpu_temp}
-                      :tooltip "CPU Temp: ${cpu_temp}°C")
-            (progress :class "stat-bar stat-bar-3"
-                      :flipped true
-                      :orientation "v"
-                      :value {disk_usage_root}
-                      :tooltip "Disk Usage: ${disk_usage_root}%")
-            (progress :class "stat-bar stat-bar-4"
-                      :flipped true
-                      :orientation "v"
-                      :value {ram_usage}
-                      :tooltip "RAM Usage: ${ram_usage}%"))))
-      (box :orientation "v"
-           :spacing 10
-        (box :class "panel-bg"
-             :orientation "v"
-             :space-evenly "false"
-          (box :orientation "h"
-            (button :class "todo-title"
-                    :halign "start"
-                    :onclick "scripts/popup task" "Todo"))
-          (box :class "todo-progress-container"
-               :halign "center"
-            (circular-progress :class "todo-progress"
-                               :value {todo.percentage}
-                               :thickness 6
-                               :start-at 75
-              (box :class "todo-count"
-                   :halign "center"
-                   :space-evenly false
-                   :orientation "h"
-                (label :class "todo-done"
-                       :text {todo.completed}
-                       :yalign 0)
-                (label :text "/")
-                (label :text {todo.total})))))
-        (box :class "panel-bg"
-             :orientation "v"
-             :space-evenly false
-             :tooltip "${weather.city}, feels like ${weather.feels_like}°C"
-          (label :halign "start"
-                 :text "${weather.desc}")
-          (label :halign "start"
-                 :text "${weather.temp}°C")
-          (label :class "weather-icon"
-                 :text "${weather.icon}"))))
-    (box :class "musicplayer"
-         :orientation "h"
-         :space-evenly "false"
-         :spacing 0
-         :valign "center"
-      (button :class "album_art"
-              :onclick "scripts/popup ncmpcpp"
-              :style "background-image: url('${music-cover}');")
-      (box :class "musicbox"
-           :orientation "v"
-           :space-evenly "false"
-           :spacing 0
-        (label :halign "center"
-               :limit-width 15
-               :text music-artist
-               :wrap "false")
-        (label :halign "center"
-               :limit-width 15
-               :text music-title
-               :wrap "false")
-        (box :class "progress-container"
-             :hexpand "false"
-             :orientation "h"
-             :vexpand "false"
-          (progress :class "music-progress"
-                    :max 50
-                    :orientation "h"
-                    :value music-progress))
-        (box :class "musicbuttons"
-             :halign "center"
-             :orientation "h"
-             :space-evenly "false"
-             :spacing 10
-             :valign "center"
-          (button :class "trackbutton"
-                  :onclick "scripts/music --music-prev"
-                  :style "background-image: url('icons/music/previous-button.png');")
-          (button :class "playbutton"
-                  :onclick "scripts/music --music-toggle"
-                  :style "background-image: url('${music-status}');")
-          (button :class "trackbutton"
-                  :onclick "scripts/music --music-next"
-                  :style "background-image: url('icons/music/next-button.png');"))))
-    (box :class "notifications-container"
-         :orientation "v"
-         :space-evenly false
-         :spacing 10
-      (box :class "notification-header"
-           :orientation "h"
-        (label :class "notifications-title"
-               :halign "start"
-               :text "Notifications")
-        (button :class "clear-button"
-                :halign "end"
-                :onclick "dunstctl history-clear" ""))
-      (box :orientation "v"
-           :space-evenly false
-           :spacing 15
+                  :space-evenly false
+                  :orientation "h"
+                  (label
+                    :class "todo-done"
+                    :text {todo.completed}
+                    :yalign 0)
+                  (label :text "/")
+                  (label :text {todo.total}))))))
+        (box
+          :class "panel-bg weather-panel"
+          :orientation "v"
+          :space-evenly false
+          :tooltip "${weather.desc}, feels like ${weather.feels_like}°C"
+          (label
+            :halign "start"
+            :text "${weather.city}")
+          (label
+            :halign "start"
+            :text "${weather.temp}°C")
+          (label
+            :class "weather-icon"
+            :halign "end"
+            :text "${weather.icon}"))))
+    (box
+      :class "musicplayer"
+      :orientation "h"
+      :space-evenly false
+      :spacing 0
+      :valign "center"
+      (button
+        :class "album_art"
+        :onclick "scripts/popup ncmpcpp"
+        :style "background-image: url('${music-cover}');")
+      (box
+        :class "musicbox"
+        :orientation "v"
+        :space-evenly false
+        :spacing 0
+        (label
+          :halign "center"
+          :limit-width 15
+          :text music-artist
+          :wrap false)
+        (label
+          :halign "center"
+          :limit-width 15
+          :text music-title
+          :wrap false)
+        (box
+          :class "progress-container"
+          :hexpand false
+          :orientation "h"
+          :vexpand false
+          (progress
+            :class "music-progress"
+            :max 50
+            :orientation "h"
+            :value music-progress))
+        (box
+          :class "musicbuttons"
+          :halign "center"
+          :orientation "h"
+          :space-evenly false
+          :spacing 10
+          :valign "center"
+          (button
+            :class "trackbutton"
+            :onclick "scripts/music --music-prev"
+            :style "background-image: url('icons/music/previous-button.png');")
+          (button
+            :class "playbutton"
+            :onclick "scripts/music --music-toggle"
+            :style "background-image: url('${music-status}');")
+          (button
+            :class "trackbutton"
+            :onclick "scripts/music --music-next"
+            :style "background-image: url('icons/music/next-button.png');"))))
+    (box
+      :class "notifications-container"
+      :orientation "v"
+      :space-evenly false
+      :spacing 5
+      (box
+        :class "notification-header"
+        :orientation "h"
+        (label
+          :class "notifications-title"
+          :halign "start"
+          :text "Notifications")
+        (button
+          :class "clear-button"
+          :halign "end"
+          :onclick "dunstctl history-clear" ""))
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 5
         (for notif in {notifications.notifications}
-          (box :class "notification-item"
-               :orientation "v"
-               :space-evenly false
-            (label :class "notification-title"
-                   :text {notif.summary}
-                   :xalign 0)
-            (label :class "notification-body"
-                   :text {notif.body}
-                   :wrap true
-                   :xalign 0)))))))
+          (box
+            :class "notification-item"
+            :orientation "v"
+            :space-evenly false
+            (label
+              :class "notification-title"
+              :text {notif.summary}
+              :xalign 0)
+            (label
+              :class "notification-body"
+              :limit-width 15
+              :lines 2
+              :text {notif.body}
+              :wrap true
+              :xalign 0)))))))
 
 ;; Screenrecord Widgets
 (defwidget screenrecord-widget []
-  (box :class "screenrecord"
-       :orientation "h"
+  (box
+    :class "screenrecord"
+    :orientation "h"
     (box
-      (label :class "screen-text"
-             :halign "left"
-             :text "Screenrecord"
-             :valign "top"))
-    (box :class "button-box"
-         :orientation "v"
-         :spacing 10
-      (button :class "screen-button"
-              :onclick "scripts/screenrecord --start-record" "Start")
-      (button :class "screen-button"
-              :onclick "scripts/screenrecord --stop-record" "Stop"))))
+      (label
+        :class "screen-text"
+        :halign "left"
+        :text "Screenrecord"
+        :valign "top"))
+    (box
+      :class "button-box"
+      :orientation "v"
+      :spacing 10
+      (button
+        :class "screen-button"
+        :onclick "scripts/screenrecord --start-record" "Start")
+      (button
+        :class "screen-button"
+        :onclick "scripts/screenrecord --stop-record" "Stop"))))
 
 ;; Screenshot Widgets
 (defwidget screenshot-widget []
-  (box :class "screenshot"
-       :orientation "h"
+  (box
+    :class "screenshot"
+    :orientation "h"
     (box
-      (label :class "screen-text"
-             :halign "left"
-             :text "Screenshot"
-             :valign "top"))
-    (box :class "button-box"
-         :orientation "v"
-         :spacing 10
-      (button :class "screen-button"
-              :onclick "scripts/screenshot --area" "Area")
-      (button :class "screen-button"
-              :onclick "scripts/screenshot --desktop" "Desktop"))))
+      (label
+        :class "screen-text"
+        :halign "left"
+        :text "Screenshot"
+        :valign "top"))
+    (box
+      :class "button-box"
+      :orientation "v"
+      :spacing 10
+      (button
+        :class "screen-button"
+        :onclick "scripts/screenshot --area" "Area")
+      (button
+        :class "screen-button"
+        :onclick "scripts/screenshot --desktop" "Desktop"))))
 
 ;; Volume Widgets
 (defwidget volume []
-  (eventbox :onhover "${eww} update volume=true"
-            :onhoverlost "${eww} update volume=false"
-    (box :orientation "v"
-         :space-evenly "false"
-         :spacing 0
-      (revealer :duration "550ms"
-                :reveal volume
-                :transition "slideup"
-        (scale :class "volbar"
-               :flipped true
-               :max 101
-               :min 0
-               :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
-               :orientation "v"
-               :tooltip "Volume: ${current-volume}%"
-               :value current-volume))
-      (button :class "volume-icon"
-              :onclick "scripts/popup audio" ""))))
+  (eventbox
+    :onhover "${eww} update volume=true"
+    :onhoverlost "${eww} update volume=false"
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 0
+      (revealer
+        :duration "550ms"
+        :reveal volume
+        :transition "slideup"
+        (scale
+          :class "volbar"
+          :flipped true
+          :max 101
+          :min 0
+          :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+          :orientation "v"
+          :tooltip "Volume: ${current-volume}%"
+          :value current-volume))
+      (button
+        :class "volume-icon"
+        :onclick "scripts/popup audio" ""))))
 
 ;; Wifi Widgets
 (defwidget wifi []
-  (box :orientation "v"
-       :tooltip wifi-name
-    (button :class "wifi-icon"
-            :onclick "scripts/popup wifi"
-            wifi-icon)))
+  (box
+    :orientation "v"
+    :tooltip wifi-name
+    (button
+      :class "wifi-icon"
+      :onclick "scripts/popup wifi"
+      wifi-icon)))
 
 ;; Workspaces Widget
 (defwidget workspaces []
-  (box :class "workspaces"
-       :orientation "v"
-       :space-evenly true
-       :spacing 0
+  (box
+    :class "workspaces"
+    :orientation "v"
+    :space-evenly true
+    :spacing 0
     (for workspace in workspaces
-      (button :class {workspace.current ? "current" : workspace.occupied ? "occupied" : ""}
-              :onclick "bspc desktop -f ${workspace.id}"
-              {workspace.icon}))))
+      (button
+        :class {workspace.current ? "current" : workspace.occupied ? "occupied" : ""}
+        :onclick "bspc desktop -f ${workspace.id}"
+        {workspace.icon}))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;         Grouped Widget                    ;;
+;;               Grouped Widget              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Bar Widgets
 (defwidget bar []
-  (box :class "bar"
-       :hexpand "false"
-       :orientation "v"
-       :vexpand "false"
+  (box
+    :class "bar"
+    :hexpand false
+    :orientation "v"
+    :vexpand false
     (top)
     (end)))
 
 ;; Bottom Widgets
 (defwidget bottom []
-  (box :orientation "v"
-       :space-evenly false
+  (box
+    :orientation "v"
+    :space-evenly false
     (time)
     (power)))
 
 ;; Control Panel Widgets
 (defwidget control []
-  (box :class "control"
-       :orientation "v"
-       :space-evenly false
+  (box
+    :class "control"
+    :orientation "v"
+    :space-evenly false
     (bat)
     (wifi)
     (bright)
@@ -418,33 +519,36 @@
 
 ;; End Widgets
 (defwidget end []
-  (box :orientation "v"
-       :space-evenly "false"
-       :spacing 5
-       :valign "end"
+  (box
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    :valign "end"
     (control)
     (bottom)))
 
 ;; Top Widgets
 (defwidget top []
-  (box :orientation "v"
-       :space-evenly false
-       :valign "start"
+  (box
+    :orientation "v"
+    :space-evenly false
+    :valign "start"
     (profile-widget)
     (workspaces)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;         Windows                           ;;
+;;                 Windows                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Bar Windows
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "11px"
-                      :y "0px"
-                      :width "38px"
-                      :height "750px"
-                      :anchor "left center")
+  :geometry (geometry
+    :x "11px"
+    :y "0px"
+    :width "38px"
+    :height "750px"
+    :anchor "left center")
   :stacking "fg"
   :reserve (struts :distance "50px" :side "left")
   :wm-ignore false
@@ -454,32 +558,36 @@
 
 ;; Calendar Windows
 (defwindow calendar
-  :geometry (geometry :x "60px"
-                      :y "538px"
-                      :width "280px"
-                      :height "60px")
+  :geometry (geometry
+    :x "60px"
+    :y "538px"
+    :width "280px"
+    :height "60px")
   (cal))
 
 ;; Notification Windows
 (defwindow notification
-  :geometry (geometry :x "60px"
-                      :y "10px"
-                      :width "280px"
-                      :height "748px")
+  :geometry (geometry
+    :x "60px"
+    :y "10px"
+    :width "330px"
+    :height "748px")
   (notification-section))
 
 ;; Screenrecord Windows
 (defwindow screenrecord
-  :geometry (geometry :x "60px"
-                      :y "613px"
-                      :width "280px"
-                      :height "100px")
+  :geometry (geometry
+    :x "60px"
+    :y "613px"
+    :width "280px"
+    :height "100px")
   (screenrecord-widget))
 
 ;; Screenshot Windows
 (defwindow screenshot
-  :geometry (geometry :x "60px"
-                      :y "613px"
-                      :width "280px"
-                      :height "100px")
+  :geometry (geometry
+    :x "60px"
+    :y "613px"
+    :width "280px"
+    :height "100px")
   (screenshot-widget))
