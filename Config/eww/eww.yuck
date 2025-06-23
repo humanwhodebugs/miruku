@@ -119,7 +119,7 @@
             :spacing 5)
           (button
             :class "screenrecord-icon"
-            :onclick "scripts/popup screenrecord" "󰙠")
+            :onclick "scripts/popup screenrecord" "")
           (button
             :class "screenshot-icon"
             :onclick "scripts/popup screenshot" "󰙠")))
@@ -289,10 +289,10 @@
           :class "panel-bg weather-panel"
           :orientation "v"
           :space-evenly false
-          :tooltip "${weather.desc}, feels like ${weather.feels_like}°C"
+          :tooltip "${weather.city}, feels like ${weather.feels_like}°C"
           (label
             :halign "start"
-            :text "${weather.city}")
+            :text "${weather.desc}")
           (label
             :halign "start"
             :text "${weather.temp}°C")
@@ -320,10 +320,12 @@
           :spacing 5
           :valign "center"
           (label
+            :class "music-artist"
             :limit-width 15
             :text music-artist
             :wrap false)
           (label
+            :class "music-title"
             :limit-width 15
             :text music-title
             :wrap false)
@@ -558,8 +560,8 @@
 (defwindow calendar
   :geometry (geometry
     :x "60px"
-    :y "538px"
-    :width "280px"
+    :y "542px"
+    :width "330px"
     :height "60px")
   (cal))
 
@@ -577,7 +579,7 @@
   :geometry (geometry
     :x "60px"
     :y "613px"
-    :width "280px"
+    :width "330px"
     :height "100px")
   (screenrecord-widget))
 
@@ -586,6 +588,6 @@
   :geometry (geometry
     :x "60px"
     :y "613px"
-    :width "280px"
+    :width "330px"
     :height "100px")
   (screenshot-widget))

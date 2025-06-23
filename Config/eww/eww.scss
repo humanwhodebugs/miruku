@@ -113,12 +113,12 @@ $yellow: #df8e1d;
   background-color: $surface2;
   border-radius: 6px;
   color: $text;
-  font-size: 1em;
+  font-size: 14px;
   font-weight: bold;
   .cal-inner-box {
-    padding: 0.5rem 0.2rem 0.2rem;
+    padding: 0.2rem 0.2rem 0.2rem;
     .cal {
-      padding: 0.48rem 0.25rem 0rem;
+      padding: 0.4rem 0.25rem 0rem;
       &.highlight {
         padding: 0rem;
       }
@@ -208,9 +208,18 @@ tooltip {
   min-width: 90px;
 }
 
-.artist {
-  font-size: 12px;
-  font-weight: bold;
+.music-artist {
+  font-size: 14px;
+}
+
+.musicbox {
+  margin: 0px 0px 0px 4px;
+}
+
+.musicbuttons {
+  background-color: $mantle;
+  border-radius: 6px;
+  padding: 8px;
 }
 
 .music-progress > trough {
@@ -224,14 +233,8 @@ tooltip {
   border-radius: 6px;
 }
 
-.musicbox {
-  margin: 0px 0px 0px 4px;
-}
-
-.musicbuttons {
-  background-color: $mantle;
-  border-radius: 6px;
-  padding: 8px;
+.music-title {
+  font-size: 14px;
 }
 
 .musicplayer {
@@ -269,7 +272,7 @@ tooltip {
   border-radius: 50%;
   min-width: 106px;
   min-height: 106px;
-  padding: 8px;
+  padding: 9px;
 }
 
 .avatar-bg {
@@ -283,14 +286,19 @@ tooltip {
   font-weight: bold;
 }
 
+.notification-body {
+  font-size: 14px;
+}
+
 .notification-header {
+  font-size: 14px;
   padding: 0px 5px;
 }
 
 .notification-item {
   background-color: $surface2;
   border-radius: 6px;
-  padding: 10px 5px;
+  padding: 9px 10px;
 }
 
 .notification-section {
@@ -302,22 +310,25 @@ tooltip {
 
 .notification-title {
   color: $text;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .notifications-container {
   background-color: $mantle;
   border-radius: 6px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .notifications-title {
+  font-size: 14px;
   font-weight: bold;
 }
 
 .panel-bg {
   background-color: $mantle;
   border-radius: 6px;
+  font-size: 14px;
   padding: 8px;
 }
 
@@ -388,7 +399,7 @@ tooltip {
 }
 
 .weather-panel {
-  min-height: 124px;
+  min-height: 126px;
 }
 
 // ============================================
