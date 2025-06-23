@@ -31,7 +31,7 @@ install_packages "EWW Dependencies" jq gtk3 pango gdk-pixbuf2 libdbusmenu-gtk3 c
 echo "╭──────────────────╮"
 echo "│ Installing Fonts │"
 echo "╰──────────────────╯"
-install_packages "Fonts" noto-fonts-emoji noto-fonts-cjk noto-fonts-extra ttf-maplemono ttf-maplemono-nf-unhinted ttf-maplemono-nf-cn-unhinted
+install_packages "Fonts" noto-fonts-emoji noto-fonts-cjk noto-fonts-extra ttf-maplemono ttf-maplemono-nf-unhinted ttf-maplemono-nf-cn-unhinted ttc-iosevka
 
 echo "╭─────────────────────────╮"
 echo "│ Installing File Manager │"
