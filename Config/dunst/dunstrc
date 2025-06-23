@@ -33,6 +33,9 @@
     progress_bar_max_width = 300
     progress_bar_corner_radius = 6
 
+    # Scripts
+    script = /home/rei/.config/dunst/scripts/logger.sh
+
     # Visual settings
     indicate_hidden = yes
     transparency = 0
@@ -47,7 +50,7 @@
     corners = all
 
     # Text settings
-    font = Maple Mono NF 10
+    font = Iosevka Term Medium 10
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"

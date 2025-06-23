@@ -1,6 +1,15 @@
 #!/bin/bash
-# A script for eww (elkowar's wacky widget) to retrieve recent notifications using dunstctl.
+# A script for eww to retrieve recent notifications from a JSON file.
 # Maintained by humanwhodebugs
 
-# Get the five most recent notifications and format them as JSON
-dunstctl history | jq -r '.data[0][0:2] | map({summary: .summary.data, body: .body.data}) | {"notifications": .}'
+HISTORY_FILE="$HOME/.config/dunst/history.json"
+
+# Pastikan file history ada sebelum dibaca
+if [ ! -f "$HISTORY_FILE" ]; then
+  echo '{"notifications": []}'
+  exit 0
+fi
+
+# Baca file JSON dan format sesuai yang dibutuhkan EWW.
+# Kita juga membuat field `time_ago` yang dinamis.
+jq -r '{notifications: map({summary: .summary, body: .body, time: (now - .timestamp | floor | if . < 60 then "Just Now" elif . < 3600 then "\(./60 | floor)m ago" else "\(./3600 | floor)h ago" end)})}' "$HISTORY_FILE"
