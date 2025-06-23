@@ -206,7 +206,7 @@
             (box
               :class "stats-bars-container"
               :orientation "h"
-              :spacing 20
+              :spacing 25
               :halign "center"
               (progress
                 :class "stat-bar stat-bar-1"
@@ -282,7 +282,7 @@
                   (label
                     :class "todo-done"
                     :text {todo.completed}
-                    :yalign 0)
+                    :yalign 0.2)
                   (label :text "/")
                   (label :text {todo.total}))))))
         (box
@@ -301,59 +301,57 @@
             :halign "end"
             :text "${weather.icon}"))))
     (box
-      :class "musicplayer"
       :orientation "h"
       :space-evenly false
-      :spacing 0
-      :valign "center"
-      (button
-        :class "album_art"
-        :onclick "scripts/popup ncmpcpp"
-        :style "background-image: url('${music-cover}');")
+      :spacing 15
       (box
-        :class "musicbox"
-        :orientation "v"
+        :class "musicplayer"
+        :orientation "h"
         :space-evenly false
         :spacing 0
-        (label
-          :halign "center"
-          :limit-width 15
-          :text music-artist
-          :wrap false)
-        (label
-          :halign "center"
-          :limit-width 15
-          :text music-title
-          :wrap false)
+        (button
+          :class "album_art"
+          :onclick "scripts/popup ncmpcpp"
+          :style "background-image: url('${music-cover}');")
         (box
-          :class "progress-container"
-          :hexpand false
-          :orientation "h"
-          :vexpand false
-          (progress
-            :class "music-progress"
-            :max 50
-            :orientation "h"
-            :value music-progress))
-        (box
-          :class "musicbuttons"
-          :halign "center"
-          :orientation "h"
+          :class "musicbox"
+          :orientation "v"
           :space-evenly false
-          :spacing 10
+          :spacing 5
           :valign "center"
-          (button
-            :class "trackbutton"
-            :onclick "scripts/music --music-prev"
-            :style "background-image: url('icons/music/previous-button.png');")
-          (button
-            :class "playbutton"
-            :onclick "scripts/music --music-toggle"
-            :style "background-image: url('${music-status}');")
-          (button
-            :class "trackbutton"
-            :onclick "scripts/music --music-next"
-            :style "background-image: url('icons/music/next-button.png');"))))
+          (label
+            :limit-width 15
+            :text music-artist
+            :wrap false)
+          (label
+            :limit-width 15
+            :text music-title
+            :wrap false)
+          (box
+            :class "progress-container"
+            :orientation "h"
+            (progress
+              :class "music-progress"
+              :max 50
+              :orientation "h"
+              :value music-progress))))
+          (box
+            :class "musicbuttons"
+            :orientation "v"
+            :spacing 10
+            :valign "center"
+            (button
+              :class "trackbutton"
+              :onclick "scripts/music --music-prev"
+              :style "background-image: url('icons/music/previous-button.png');")
+            (button
+              :class "playbutton"
+              :onclick "scripts/music --music-toggle"
+              :style "background-image: url('${music-status}');")
+            (button
+              :class "trackbutton"
+              :onclick "scripts/music --music-next"
+              :style "background-image: url('icons/music/next-button.png');")))
     (box
       :class "notifications-container"
       :orientation "v"
