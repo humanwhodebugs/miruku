@@ -114,7 +114,7 @@
           :space-evenly false
           (systray
             :class "tray"
-            :icon-size 17
+            :icon-size 18
             :orientation "v"
             :spacing 5)
           (button
@@ -361,7 +361,6 @@
       :spacing 5
       (box
         :class "notification-header"
-        :orientation "h"
         (label
           :class "notifications-title"
           :halign "start"
@@ -369,7 +368,7 @@
         (button
           :class "clear-button"
           :halign "end"
-          :onclick "dunstctl history-clear" ""))
+          :onclick "$HOME/.config/eww/scripts/clear-notifications" ""))
       (box
         :orientation "v"
         :space-evenly false
@@ -377,25 +376,35 @@
         (for notif in {notifications.notifications}
           (box
             :class "notification-item"
-            :orientation "v"
+            :orientation "h"
             :space-evenly false
+            :spacing 10
+            (image
+              :class "notification-icon"
+              :style "background-image: url('icons/notification.png');"
+              :valign "center")
             (box
+              :hexpand true
+              :orientation "v"
+              :space-evenly false
+              :valign "center"
+              (box
+                (label
+                  :class "notification-title"
+                  :limit-width 25
+                  :text {notif.summary}
+                  :xalign 0)
+                (label
+                  :class "notification-time"
+                  :halign "end"
+                  :text {notif.time}))
               (label
-                :class "notification-title"
-                :limit-width 15
-                :text {notif.summary}
-                :xalign 0)
-              (label
-                :class "notification-time"
-                :halign "end"
-                :text {notif.time}))
-            (label
-              :class "notification-body"
-              :limit-width 15
-              :lines 2
-              :text {notif.body}
-              :wrap true
-              :xalign 0)))))))
+                :class "notification-body"
+                :limit-width 25
+                :lines 2
+                :text {notif.body}
+                :wrap true
+                :xalign 0))))))))
 
 ;; Screenrecord Widgets
 (defwidget screenrecord-widget []

@@ -1,24 +1,41 @@
 #!/bin/bash
-# ======================= VERSI FINAL BERSIH =======================
-# Menangkap notifikasi, menyimpannya ke file, dan secara proaktif
-# memberitahu EWW untuk memperbarui UI.
+# A script to capture notifications, save them, and push updates to EWW.
+# Maintained by humanwhodebugs
 
+# Path to the JSON file for notification history
 HISTORY_FILE="$HOME/.config/dunst/history.json"
-MAX_HISTORY=50
+# Maximum number of notifications to keep in the history
+MAX_HISTORY=2
+# Path to the EWW notifications script
+EWW_NOTIFICATIONS_SCRIPT="$HOME/.config/eww/scripts/notifications"
+# Path to the eww binary
+EWW_BIN="$HOME/.local/bin/eww"
 
-# Bagian 1: Simpan notifikasi ke file
+# --- Part 1: Save Notification to File ---
+
+# Generate a Unix timestamp for the current notification
 timestamp=$(date +%s)
-new_notification=$(jq -n --arg ts "$timestamp" --arg appname "$1" --arg summary "$2" --arg body "$3" \
+# Create a new JSON object for the notification
+new_notification=$(jq -n \
+  --arg ts "$timestamp" \
+  --arg appname "$1" \
+  --arg summary "$2" \
+  --arg body "$3" \
   '{timestamp: $ts | tonumber, appname: $appname, summary: $summary, body: $body}')
 
+# Create the history file if it doesn't exist
 if [ ! -f "$HISTORY_FILE" ]; then
   echo "[]" >"$HISTORY_FILE"
 fi
 
+# Use a temporary file to safely write the new history
 TMP_FILE="${HISTORY_FILE}.tmp"
-jq --argjson new_notif "$new_notification" --arg max_h "$MAX_HISTORY" \
-  '[ $new_notif ] + . | .[0:($max_h | tonumber)]' "$HISTORY_FILE" >"$TMP_FILE"
+jq --argjson new_notif "$new_notification" \
+  --arg max_h "$MAX_HISTORY" \
+  '[ $new_notif ] + . | .[0:($max_h | tonumber)]' \
+  "$HISTORY_FILE" >"$TMP_FILE"
 
+# If jq command was successful, replace the old history file with the new one
 if [ $? -eq 0 ]; then
   mv "$TMP_FILE" "$HISTORY_FILE"
 else
@@ -26,11 +43,10 @@ else
   exit 1
 fi
 
-# Bagian 2: Push update ke EWW
-EWW_NOTIFICATIONS_SCRIPT="$HOME/.config/eww/scripts/notifications"
+# --- Part 2: Push Update to EWW ---
 
+# Check if the EWW script is executable, then trigger an update
 if [ -x "$EWW_NOTIFICATIONS_SCRIPT" ]; then
   formatted_json=$($EWW_NOTIFICATIONS_SCRIPT)
-  # Ganti '/path/absolut/ke/eww' dengan hasil dari `which eww`
-  $HOME/.local/bin/eww update "notifications=$formatted_json"
+  ${EWW_BIN} update "notifications=$formatted_json"
 fi
