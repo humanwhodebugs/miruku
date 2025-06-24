@@ -496,10 +496,12 @@ scale trough {
   padding: 2px;
   button {
     &.current {
-      padding-right: 2px;
+      padding-right: 3px;
     }
     &.occupied {
       color: $text;
+      font-size: 19px;
+      padding-right: 3px;
     }
   }
 }

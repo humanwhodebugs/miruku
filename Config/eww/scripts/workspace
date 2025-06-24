@@ -36,7 +36,7 @@ workspaces() {
     if [ "$CURRENT" = "true" ]; then
       ICON="󰮯" # Focused workspace
     elif [ "$OCCUPIED_STATUS" = "true" ]; then
-      ICON="●" # Occupied but not focused
+      ICON="󰊠" # Occupied but not focused
     else
       ICON="●" # Empty workspace
     fi

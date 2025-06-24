@@ -19,6 +19,9 @@ get_weather_icon() {
   *cloudy*)
     echo "" # Cloudy
     ;;
+  *overcast*)
+    echo "" # Overcast
+    ;;
   *rain* | *shower*)
     echo "" # Rain/Showers
     ;;
