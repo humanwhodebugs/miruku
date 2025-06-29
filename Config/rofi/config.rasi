@@ -22,7 +22,7 @@ configuration {
     selected:       #E6E9EF;
     active:         #1E66F5;
     urgent:         #E6E9EF;
-    font:           "Maple Mono NF 10";
+    font:           "Iosevka Term Medium 11";
 
     /* Colors Mapping */
     border-colour:               var(selected);
