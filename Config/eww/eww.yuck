@@ -564,7 +564,7 @@
     :x "11px"
     :y "0px"
     :width "38px"
-    :height "750px"
+    :height "748px"
     :anchor "left center")
   :stacking "fg"
   :reserve (struts :distance "50px" :side "left")
@@ -588,7 +588,7 @@
     :x "60px"
     :y "10px"
     :width "330px"
-    :height "749px")
+    :height "748px")
   (notification-section))
 
 ;; Screenrecord Windows
