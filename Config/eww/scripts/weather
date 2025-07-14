@@ -3,7 +3,7 @@
 # Maintained by humanwhodebugs
 
 # City for which to fetch weather data
-CITY="Kapuas"
+CITY="Banjarmasin"
 
 # Function: Determines a weather icon based on the weather description string.
 # - Takes a weather description as its first argument.
