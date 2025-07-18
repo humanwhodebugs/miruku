@@ -14,4 +14,4 @@ Run both install script.
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/427a4745-9277-45b0-8a6d-9ae04b95e45f)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/c05dce5a-eb97-4086-b273-9f9e2390bac3" />
