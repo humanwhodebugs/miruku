@@ -576,7 +576,7 @@
   :geometry (geometry
     :x "60px"
     :y "542px"
-    :width "330px"
+    :width "331px"
     :height "60px")
   (cal))
 
@@ -585,7 +585,7 @@
   :geometry (geometry
     :x "60px"
     :y "10px"
-    :width "330px"
+    :width "331px"
     :height "748px")
   (notification-section))
 
@@ -594,7 +594,7 @@
   :geometry (geometry
     :x "60px"
     :y "613px"
-    :width "330px"
+    :width "331px"
     :height "100px")
   (screenrecord-widget))
 
@@ -603,6 +603,6 @@
   :geometry (geometry
     :x "60px"
     :y "613px"
-    :width "330px"
+    :width "331px"
     :height "100px")
   (screenshot-widget))
