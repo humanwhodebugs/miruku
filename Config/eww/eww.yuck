@@ -188,10 +188,8 @@
         :spacing 15
         :space-evenly false
         (box
-          :class "avatar-bg"
           (image
             :class "avatar"
-            :halign "center"
             :style "background-image: url('icons/profile.jpg');"))
         (box
           :class "panel-bg"

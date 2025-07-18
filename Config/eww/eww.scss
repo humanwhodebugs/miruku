@@ -269,16 +269,8 @@ tooltip {
 // ============================================
 .avatar {
   background-size: cover;
-  border-radius: 50%;
-  min-width: 106px;
-  min-height: 106px;
-  padding: 9px;
-}
-
-.avatar-bg {
-  background-color: $mantle;
   border-radius: 6px;
-  padding: 5px;
+  min-height: 143px;
 }
 
 .clear-button {
@@ -361,7 +353,7 @@ tooltip {
   trough {
     background-color: $surface2;
     border-radius: 5px;
-    min-height: 180px;
+    min-height: 171px;
     min-width: 6px;
   }
   progress {
