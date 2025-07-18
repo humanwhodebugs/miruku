@@ -122,7 +122,7 @@ makepkg -si
 BSPWM Dependencies
 git clone https://github.com/wmutils/opt
 cd opt
-make
+sudo make
 sudo make install
 
 4. Configuring ThinkFan
