@@ -83,7 +83,7 @@ Include= /etc/pacman.d/mirrorlist
 
 And add this to the end of file:
 [archlinuxcn]
-Server = https://repo.archlinuxcn.org/$arch
+Server = https://mirrors.aliyun.com/archlinux/$arch
 
 13. Install Bootloader
 grub-install /dev/sda
