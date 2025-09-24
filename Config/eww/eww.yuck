@@ -290,6 +290,7 @@
           :tooltip "${weather.city}, feels like ${weather.feels_like}°C"
           (label
             :halign "start"
+            :limit-width 15
             :text "${weather.desc}")
           (label
             :halign "start"
