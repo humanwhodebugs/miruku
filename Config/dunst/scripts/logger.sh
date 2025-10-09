@@ -50,3 +50,7 @@ if [ -x "$EWW_NOTIFICATIONS_SCRIPT" ]; then
   formatted_json=$($EWW_NOTIFICATIONS_SCRIPT)
   ${EWW_BIN} update "notifications=$formatted_json"
 fi
+
+# --- Part 3: Trigger popup window in EWW ---
+${EWW_BIN} open notif
+(sleep 5 && ${EWW_BIN} close notif) &

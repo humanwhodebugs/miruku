@@ -126,6 +126,50 @@
       (button :onclick "scripts/popup calendar" hour)
       (button :onclick "scripts/popup calendar" min))))
 
+;; Notification Popup Widget
+(defwidget notification-popup [summary body time]
+  (box
+    :class "notif-popup"
+    :orientation "v"
+    :space-evenly false
+      (box
+        :class "notif-header"
+        (label
+          :class "notif-title"
+          :halign "start"
+          :text "Notification")
+        (label
+          :class "notif-time"
+          :halign "end"
+          :text time))
+      (box
+        :class "notif-item"
+        :orientation "h"
+        :space-evenly false
+        :spacing 5
+        (box
+          :class "notif-box"
+          :hexpand true
+          :orientation "v"
+          :space-evenly false
+          :valign "center"
+          (box
+            (label
+              :class "notif-name"
+              :limit-width 25
+              :text summary
+              :xalign 0))
+          (label
+            :class "notif-body"
+            :limit-width 25
+            :text body
+            :wrap true
+            :xalign 0))
+        (image
+          :class "notif-icon"
+          :style "background-image: url('icons/notification.png');"
+          :valign "center"))))
+
 ;; Powermenu Widgets
 (defwidget power []
   (eventbox
@@ -580,6 +624,18 @@
     :width "331px"
     :height "60px")
   (cal))
+
+;; Notification Popup
+(defwindow notif
+  :geometry (geometry
+    :x "1076px"
+    :y "10px"
+    :width "280px"
+    :height "60px")
+  (notification-popup
+    :summary {notifications.notifications[0].summary}
+    :body {notifications.notifications[0].body}
+    :time {notifications.notifications[0].time}))
 
 ;; Notification Windows
 (defwindow notification

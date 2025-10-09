@@ -39,7 +39,7 @@ run_rofi() {
   echo -e "$option_1\n$option_2" | rofi_cmd
 }
 
-# Function: Start screen recording using ffmpeg
+# Function: Start screen recording using ffmpeg (WhatsApp-compatible)
 start_recording() {
   n=1
   # Find next available file name
@@ -47,8 +47,11 @@ start_recording() {
 
   # Launch ffmpeg screen recording (X11 + PulseAudio)
   ffmpeg -f pulse -i alsa_output.pci-0000_00_1b.0.analog-stereo.monitor \
-    -f x11grab -framerate 60 -video_size 1366x768 -i :0.0 \
-    -c:v libx264 -preset ultrafast -tune zerolatency -crf 30 "$HOME/Videos/Screenrecords/screen-recording-$n.mp4" &
+    -f x11grab -framerate 30 -video_size 1366x768 -i :0.0 \
+    -c:v libx264 -preset ultrafast -tune zerolatency -crf 28 \
+    -pix_fmt yuv420p -profile:v baseline -level 3.1 \
+    -c:a aac -b:a 128k \
+    "$HOME/Videos/Screenrecords/screen-recording-$n.mp4" &
 
   echo $! >/tmp/screen_recording.pid # Save process ID
   notify-send -t 2000 "Screen Recorder" "Recording started: screen-recording-$n.mp4"

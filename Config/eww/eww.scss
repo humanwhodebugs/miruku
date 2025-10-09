@@ -278,13 +278,33 @@ tooltip {
   font-weight: bold;
 }
 
+.notif-body {
+  font-size: 14px;
+}
+
 .notification-body {
   font-size: 14px;
+}
+
+.notif-box {
+  padding: 8px 3px;
+}
+
+.notif-header {
+  background-color: $mantle;
+  border-radius: 6px 6px 0px 0px;
+  padding: 6px 8px;
 }
 
 .notification-header {
   font-size: 14px;
   padding: 0px 5px;
+}
+
+.notif-icon {
+  background-size: cover;
+  min-width: 35px;
+  min-height: 35px;
 }
 
 .notification-icon {
@@ -294,10 +314,27 @@ tooltip {
   padding: 4px;
 }
 
+.notif-item {
+  border-radius: 6px;
+  color: $text;
+  padding: 4px 5px;
+}
+
 .notification-item {
   background-color: $surface2;
   border-radius: 6px;
   padding: 9px 10px;
+}
+
+.notif-name {
+  color: $text;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.notif-popup {
+  background-color: $surface2;
+  border-radius: 6px;
 }
 
 .notification-section {
@@ -307,9 +344,21 @@ tooltip {
   padding: 15px;
 }
 
+.notif-title {
+  color: $text;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .notification-title {
   color: $text;
   font-size: 14px;
+  font-weight: bold;
+}
+
+.notif-time {
+  color: $text;
+  font-size: 12px;
   font-weight: bold;
 }
 

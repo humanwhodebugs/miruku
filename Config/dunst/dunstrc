@@ -19,8 +19,8 @@
     follow = none
 
     # Geometry
-    width = 250
-    height = (0, 300)
+    width = 0
+    height = (0, 0)
     origin = top-right
     offset = (10, 10)
     notification_limit = 20
